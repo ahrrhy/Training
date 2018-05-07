@@ -780,8 +780,8 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 @font-face {
-  font-family: 'Ubuntu-Regular';
-  src: url("../../../fonts/Ubuntu-Regular/Ubuntu-Regular.eot?#iefix") format("embedded-opentype"), url("../../../fonts/Ubuntu-Regular/Ubuntu-Regular.woff") format("woff"), url("../../../fonts/Ubuntu-Regular/Ubuntu-Regular.ttf") format("truetype"), url("../../../fonts/Ubuntu-Regular/Ubuntu-Regular.svg#Ubuntu-Regular") format("svg");
+  font-family: 'Ubuntu';
+  src: url("../../../fonts/Ubuntu/Ubuntu-Light.eot?#iefix") format("embedded-opentype"), url("../../../fonts/Ubuntu/Ubuntu-Light.woff") format("woff"), url("../../../fonts/Ubuntu/Ubuntu-Light.ttf") format("truetype"), url("../../../fonts/Ubuntu/Ubuntu-Light.svg#Ubuntu-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -924,19 +924,20 @@ h1, h2, h3, h4, h5, h6 {
 .header-navigation .list {
   width: 100%;
   max-width: 100%;
+  text-align: center;
 }
-/* line 62, ../sass/parts/components/_header.scss */
+/* line 63, ../sass/parts/components/_header.scss */
 .header-navigation .item {
   text-transform: uppercase;
   text-align: center;
   color: #414141;
   font: 500 1.16em/0.77em "Ubuntu-Medium";
 }
-/* line 67, ../sass/parts/components/_header.scss */
+/* line 68, ../sass/parts/components/_header.scss */
 .header-navigation .item a {
   text-decoration: none;
 }
-/* line 73, ../sass/parts/components/_header.scss */
+/* line 74, ../sass/parts/components/_header.scss */
 .header-navigation .active::after {
   content: "";
   display: inline-block;
@@ -950,7 +951,36 @@ h1, h2, h3, h4, h5, h6 {
   border-width: 4px 3.5px 0 3.5px;
   border-color: #f36b47 transparent transparent transparent;
 }
-/* line 86, ../sass/parts/components/_header.scss */
+/* line 87, ../sass/parts/components/_header.scss */
 .header-navigation .active {
   position: relative;
+}
+
+/* line 92, ../sass/parts/components/_header.scss */
+.slider-section {
+  position: relative;
+}
+/* line 95, ../sass/parts/components/_header.scss */
+.slider-section .header {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  color: #fff;
+  z-index: 10;
+}
+/* line 102, ../sass/parts/components/_header.scss */
+.slider-section .header span {
+  margin: 5px 0;
+  display: block;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
+}
+/* line 107, ../sass/parts/components/_header.scss */
+.slider-section .header span:first-child {
+  padding: 10px;
+  font: 500 1.38em/1.05em "Ubuntu";
+}
+/* line 111, ../sass/parts/components/_header.scss */
+.slider-section .header span:last-child {
+  padding: 8px;
+  font: 700 1.38em/1.38em "Ubuntu";
 }
