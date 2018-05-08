@@ -19,6 +19,7 @@
  * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
  * html5doctor.com/html-5-reset-stylesheet/
  */
+
 /* line 20, ../sass/parts/helpers/_reset.scss */
 html, body, body div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -769,19 +770,19 @@ h1, h2, h3, h4, h5, h6 {
 */
 @font-face {
   font-family: 'MyriadPro-Regular';
-  src: url("../../../fonts/MyriadPro-Regular/MyriadPro-Regular.eot?#iefix") format("embedded-opentype"), url("../../../fonts/MyriadPro-Regular/MyriadPro-Regular.otf") format("opentype"), url("../../../fonts/MyriadPro-Regular/MyriadPro-Regular.woff") format("woff"), url("../../../fonts/MyriadPro-Regular/MyriadPro-Regular.ttf") format("truetype"), url("../../../fonts/MyriadPro-Regular/MyriadPro-Regular.svg#MyriadPro-Regular") format("svg");
+  src: url("../fonts/MyriadPro-Regular/MyriadPro-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/MyriadPro-Regular/MyriadPro-Regular.otf") format("opentype"), url("../fonts/MyriadPro-Regular/MyriadPro-Regular.woff") format("woff"), url("../fonts/MyriadPro-Regular/MyriadPro-Regular.ttf") format("truetype"), url("../fonts/MyriadPro-Regular/MyriadPro-Regular.svg#MyriadPro-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Ubuntu-Medium';
-  src: url("../../../fonts/Ubuntu-Medium/Ubuntu-Medium.eot?#iefix") format("embedded-opentype"), url("../../../fonts/Ubuntu-Medium/Ubuntu-Medium.woff") format("woff"), url("../../../fonts/Ubuntu-Medium/Ubuntu-Medium.ttf") format("truetype"), url("../../../fonts/Ubuntu-Medium/Ubuntu-Medium.svg#Ubuntu-Medium") format("svg");
+  src: url("../fonts/Ubuntu-Medium/Ubuntu-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Ubuntu-Medium/Ubuntu-Medium.woff") format("woff"), url("../fonts/Ubuntu-Medium/Ubuntu-Medium.ttf") format("truetype"), url("../fonts/Ubuntu-Medium/Ubuntu-Medium.svg#Ubuntu-Medium") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Ubuntu';
-  src: url("../../../fonts/Ubuntu/Ubuntu-Light.eot?#iefix") format("embedded-opentype"), url("../../../fonts/Ubuntu/Ubuntu-Light.woff") format("woff"), url("../../../fonts/Ubuntu/Ubuntu-Light.ttf") format("truetype"), url("../../../fonts/Ubuntu/Ubuntu-Light.svg#Ubuntu-Regular") format("svg");
+  src: url("../fonts/Ubuntu/Ubuntu-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Ubuntu/Ubuntu-Light.woff") format("woff"), url("../fonts/Ubuntu/Ubuntu-Light.ttf") format("truetype"), url("../fonts/Ubuntu/Ubuntu-Light.svg#Ubuntu-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
 }

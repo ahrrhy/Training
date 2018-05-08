@@ -2,6 +2,8 @@
     var a = 'someVal';
     console.log(a);
 })();
-;(function () {
+var a = (function () {
     console.log('b');
+    console.log('c');
+    return 'try';
 })();

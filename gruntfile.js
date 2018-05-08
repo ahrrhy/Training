@@ -1,4 +1,7 @@
 module.exports = function(grunt) {
+
+    const mozjpeg = require('imagemin-mozjpeg');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -14,11 +17,12 @@ module.exports = function(grunt) {
                 undef: true,
                 eqnull: true,
                 browser: true,
-                esversion: 6,
+                "esversion": 6,
                 globals: {
                     jQuery: true,
                     $: true,
-                    console: true
+                    console: true,
+                    "esversion": 6
                 }
             },
             '<%= pkg.name %>': {
@@ -29,7 +33,7 @@ module.exports = function(grunt) {
         concat: {
             dist: {
                 src: ['src/js/*.js', 'src/js/**/*.js'],
-                dest: 'dest/build.js'
+                dest: 'dest/js/build.js'
             }
         },
 
@@ -40,15 +44,100 @@ module.exports = function(grunt) {
             },
 
             build: {
-                src: 'dest/build.js',
-                dest: 'dest/build.min.js'
+                src: 'dest/js/build.js',
+                dest: 'dest/js/build.min.js'
             }
+        },
+
+        cssmin: {
+            with_banner: {
+                options: {
+                    banner: '/* Minified CSS */\n'
+                },
+
+                files: {
+                    'dest/css/main.min.css' : ['src/css/ie.css', 'src/css/print.css', 'src/css/screen.css']
+                }
+            }
+        },
+
+        imagemin: {
+
+            dynamic: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/',
+                    src: ['img/*.{png,jpg,gif}'],
+                    dest: 'dest/'
+                }]
+            }
+        },
+
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'dest/index.html': 'src/index.html'
+                }
+            }
+        },
+
+        compass: {
+            dist: {
+                options: {
+                    sassDir: 'src/sass',
+                    cssDir: 'src/css',
+                    environment: 'production'
+                }
+            }
+        },
+
+        copy: {
+            main: {
+                expand: true,
+                cwd: 'src',
+                src: 'fonts/**/*',
+                dest: 'dest/',
+            },
+        },
+
+        watch: {
+            options: {
+                livereload: true
+            },
+
+            scripts: {
+                files: ['src/js/*.js', 'src/js/**/*.js'],
+                tasks: ['jshint', 'concat', 'uglify']
+            },
+
+            css: {
+                files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
+                tasks: ['compass', 'cssmin', 'htmlmin']
+            },
+
+            livereload: {
+                options: {
+                    livereload: true
+                },
+                files: ['dest/*'],
+            },
+
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
 };
