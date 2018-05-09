@@ -43,11 +43,17 @@ $light-gray: #9d9c9c;
 $light-gray2: #7a7a7a;
 $medium-gray: #605f5f;
 $soft-gray: #f0f0f0;
+$soft-gray1: #cecece;
 
 $myriadProRegular: 'MyriadPro-Regular';
 $ubuntu: 'Ubuntu';
 $ubuntu-medium: 'Ubuntu-Medium';
 
+.img-responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 
 /**

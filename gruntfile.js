@@ -89,15 +89,15 @@ module.exports = function(grunt) {
 
         // while on work use sass
 
-        // compass: {
-        //     dist: {
-        //         options: {
-        //             sassDir: 'src/sass',
-        //             cssDir: 'src/css',
-        //             environment: 'production'
-        //         }
-        //     }
-        // },
+        compass: {
+            dist: {
+                options: {
+                    sassDir: 'src/sass',
+                    cssDir: 'src/css',
+                    environment: 'production'
+                }
+            }
+        },
 
         connect: {
             server: {
@@ -117,24 +117,15 @@ module.exports = function(grunt) {
 
         },
 
-        sass: {
-            dist: {
-                files: {
-                    'src/css/ie.css': 'src/sass/ie.scss',
-                    'src/css/print.css': 'src/sass/print.scss',
-                    'src/css/screen.css': 'src/sass/screen.scss',
-                }
-            }
-        },
-
-        copy: {
-            main: {
-                expand: true,
-                cwd: 'src',
-                src: 'fonts/**/*',
-                dest: 'dest/',
-            },
-        },
+        // sass: {
+        //     dist: {
+        //         files: {
+        //             'src/css/ie.css': 'src/sass/ie.scss',
+        //             'src/css/print.css': 'src/sass/print.scss',
+        //             'src/css/screen.css': 'src/sass/screen.scss',
+        //         }
+        //     }
+        // },
 
         watch: {
             // options: {
@@ -149,7 +140,7 @@ module.exports = function(grunt) {
             css: {
                 files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
                 tasks: [
-                    'sass',
+                    'compass',
                     'cssmin',
                     'htmlmin']
             }
@@ -160,14 +151,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    //grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    //grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
     // add connect and compass if is needed
-    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'sass', 'cssmin', 'htmlmin', 'watch']);
+    grunt.registerTask('default', ['imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
 };
