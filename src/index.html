@@ -3,9 +3,9 @@
 <head>
 
     <!-- Font Awesome-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+  <link type="text/html" rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
-  <link href="../dest/css/main.min.css" media="screen, projection" rel="stylesheet"/>
+  <link href="css/main.min.css" media="screen, projection" rel="stylesheet"/>
 
 
   <meta charset="UTF-8">
@@ -44,7 +44,12 @@
     </header>
 
     <section class="container slider-section">
-        <h2 class="header"><span>Welcome To UIBrush</span><span>We Provide Ultimate Templates</span></h2>
+        <h2 class="header"><span class="block">
+                <span class="inline-block">Welcome To UIBrush</span></span>
+            <span class="block">
+                <span class="inline-block">We Provide Ultimate Templates</span>
+            </span>
+            </h2>
         <div class="slide">
             <img src="./img/header-slide-01.jpg" alt="first-slide">
         </div>
@@ -57,6 +62,7 @@
         <p class="copyright">Copyright © 2015 Default Value.</p>
     </footer>
 
-    <script src="../dest/js/build.js"></script>
+    <script src="js/build.js"></script>
+    <!--<script src="//localhost:35729/livereload.js" ></script>-->
 </body>
 </html>

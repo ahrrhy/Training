@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function(grunt) {
 
     const mozjpeg = require('imagemin-mozjpeg');
@@ -52,7 +54,7 @@ module.exports = function(grunt) {
         cssmin: {
             with_banner: {
                 options: {
-                    banner: '/* Minified CSS */\n'
+                    banner: ''
                 },
 
                 files: {
@@ -85,12 +87,42 @@ module.exports = function(grunt) {
             }
         },
 
-        compass: {
-            dist: {
+        // while on work use sass
+
+        // compass: {
+        //     dist: {
+        //         options: {
+        //             sassDir: 'src/sass',
+        //             cssDir: 'src/css',
+        //             environment: 'production'
+        //         }
+        //     }
+        // },
+
+        connect: {
+            server: {
                 options: {
-                    sassDir: 'src/sass',
-                    cssDir: 'src/css',
-                    environment: 'production'
+                    port: 3000,
+                    livereload: 35729,
+                    hostname: 'localhost',
+                    base: 'dest'
+                },
+                livereload: {
+                    options: {
+                        open: true,
+                        base: 'dest'
+                    }
+                }
+            }
+
+        },
+
+        sass: {
+            dist: {
+                files: {
+                    'src/css/ie.css': 'src/sass/ie.scss',
+                    'src/css/print.css': 'src/sass/print.scss',
+                    'src/css/screen.css': 'src/sass/screen.scss',
                 }
             }
         },
@@ -105,9 +137,9 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            options: {
-                livereload: true
-            },
+            // options: {
+            //     livereload: true
+            // },
 
             scripts: {
                 files: ['src/js/*.js', 'src/js/**/*.js'],
@@ -116,16 +148,11 @@ module.exports = function(grunt) {
 
             css: {
                 files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
-                tasks: ['compass', 'cssmin', 'htmlmin']
-            },
-
-            livereload: {
-                options: {
-                    livereload: true
-                },
-                files: ['dest/*'],
-            },
-
+                tasks: [
+                    'sass',
+                    'cssmin',
+                    'htmlmin']
+            }
         }
     });
 
@@ -133,11 +160,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-compass');
+    //grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
+    // add connect and compass if is needed
+    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'sass', 'cssmin', 'htmlmin', 'watch']);
 };
