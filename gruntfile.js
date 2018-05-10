@@ -58,9 +58,19 @@ module.exports = function(grunt) {
                 },
 
                 files: {
-                    'dest/css/main.min.css' : ['src/css/ie.css', 'src/css/print.css', 'src/css/screen.css']
+                    'dest/css/main.min.css' : ['src/css/ie.css', 'src/css/print.css', 'src/css/screen.css'],
+                    'dest/css/fontawesome-all.css': 'src/css/fontawesome-all.css'
                 }
             }
+        },
+
+        copy: {
+            main: {
+                expand: true,
+                cwd: 'src',
+                src: 'fonts/**/*',
+                dest: 'dest/',
+            },
         },
 
         imagemin: {
@@ -158,6 +168,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
     // add connect and compass if is needed
-    grunt.registerTask('default', ['imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
+    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
 };

@@ -1,0 +1,111 @@
+.main {
+
+  .services-list{
+    @extend %reset-ul;
+  }
+
+  .header {
+    font: 500 2em/1.9em $ubuntu-medium;
+    text-align: center;
+    margin-bottom: 20px;
+
+    span{
+      border-bottom: 2px solid $orange;
+      display: inline-block;
+    }
+  }
+
+  .description {
+    color: $light-gray;
+    font: 400 1.38em/1.9em $ubuntu;
+    text-align: center;
+    padding: 0 30px 30px;
+    margin-bottom: 50px;
+    @extend %border-bottom;
+  }
+
+  .services-section {
+    padding: 50px 0;
+    @extend %border-bottom;
+  }
+
+  .services-list {
+
+    .name {
+      font: 400 1.85em/1.7em $myriadProRegular;
+      margin-bottom: 15px;
+      color: $dark-gray2;
+
+      &:before {
+        display: block;
+        text-align: center;
+        font-size: 2.3em;
+        line-height: 1.9em;
+        color: $orange;
+      }
+    }
+  }
+
+  .service {
+    width: 75%;
+    text-align: center;
+    margin: 0 auto;
+    font: 400 1.38em/1.38em $ubuntu;
+    color: $light-gray;
+  }
+
+  //projects//
+
+  .recent-projects-section {
+    .header {
+      margin-top: 80px;
+    }
+
+    .description {
+      border-bottom: none;
+    }
+  }
+
+  .projects-list {
+    @extend %reset-ul;
+    text-align: center;
+  }
+
+  .project {
+    width: 250px;
+    text-align: center;
+    margin: 60px auto;
+
+    img {
+      @extend %img-responsive;
+    }
+
+    header {
+      background: $light-gray1;
+      padding: 9px;
+      border: 1px solid $soft-gray3;
+
+      .name {
+        font: 500 1.84em/1.38em $ubuntu-medium;
+        color: $orange1;
+        position: relative;
+        &:after {
+          content: "";
+          width: 97%;
+          position: absolute;
+          left: 1.5%;
+          -ms-transform: translate(0, -6px); /* IE 9 */
+          -webkit-transform: translate(0, -6px); /* Safari */
+          transform: translate(0, -6px);
+          height: 2px;
+          display: block;
+          background: $soft-gray2;
+        }
+      }
+
+      p {
+        font: 400 1.38em/1.36em $ubuntu;
+      }
+    }
+  }
+}
