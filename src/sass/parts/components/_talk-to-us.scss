@@ -1,0 +1,144 @@
+.talk-to-us {
+  background: $light-gray2;
+  color: #fff;
+  padding: 50px 0;
+
+  .header {
+    text-align: center;
+    font: 400 4.61em/1.84em $ubuntu;
+    padding-top: 30px;
+    span {
+      color: $orange;
+    }
+  }
+
+  p {
+    text-align: center;
+    font: 400 1.84em/1.38em $myriadProRegular;
+    padding: 25px;
+  }
+}
+
+.contact-us-section {
+  padding: 50px 0;
+
+  .header {
+    @extend %section-header;
+    font: 500 3.7em/1.3em $ubuntu-medium;
+    margin-bottom: 60px;
+  }
+
+  .description {
+    @extend %section-description;
+  }
+
+  .map-box {
+    img {
+      @extend %img-responsive;
+    }
+    margin-bottom: 60px;
+  }
+
+  .contacts {
+
+    .header {
+      position: relative;
+
+      &:after {
+        content: "";
+        display: inline-block;
+        height: 2px;
+        width: 55%;
+        position: absolute;
+        bottom: 0;
+        left: 22.5%;
+        background: $orange;
+      }
+    }
+  }
+
+  .contacts-list {
+    @extend %reset-ul;
+
+    .item {
+
+      margin: 50px 0 50px 55px;
+
+      &:before {
+        color: $orange;
+        font-size: 2.2em;
+        margin-right: 45px;
+      }
+
+      a {
+        color: $light-gray;
+        font: 400 2.3em/2em $ubuntu;
+        text-align: left;
+        vertical-align: middle;
+        display: inline-block;
+        width: 75%;
+      }
+    }
+
+    .item:nth-child(2):before {
+      content: "\f003";
+      margin-right: 38px;
+    }
+
+    .item:last-child:before {
+      margin-right: 50px;
+    }
+
+  }
+
+  .form-list {
+    @extend %reset-ul;
+
+    .item {
+      margin: 10px 0;
+
+      &:last-child {
+        text-align: center;
+        margin: 25px;
+      }
+    }
+
+    input, textarea{
+      border-radius: 0;
+      border: 1px solid $soft-gray4;
+      background: $soft-gray;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      display: inline-block;
+      box-sizing: border-box;
+      width: 92%;
+      height: auto;
+      margin-left: 22px;
+      font: 400 1.23em/1.9em $ubuntu;
+      padding: 20px 16px;
+
+      &::placeholder {
+        color: $soft-gray4;
+        text-transform: capitalize;
+
+      }
+    }
+
+    textarea {
+      resize: none;
+      height: 170px;
+    }
+
+    input[type="submit"] {
+      width: 75%;
+      background: $orange;
+      color: #fff;
+      font: 400 1.54em/1.1em $myriadProRegular;
+      text-transform: capitalize;
+      padding: 10px;
+    }
+
+  }
+
+}

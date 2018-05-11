@@ -1,26 +1,15 @@
 .main {
 
+  .header {
+    @extend %section-header;
+  }
+
   .services-list{
     @extend %reset-ul;
   }
 
-  .header {
-    font: 500 2em/1.9em $ubuntu-medium;
-    text-align: center;
-    margin-bottom: 20px;
-
-    span{
-      border-bottom: 2px solid $orange;
-      display: inline-block;
-    }
-  }
-
   .description {
-    color: $light-gray;
-    font: 400 1.38em/1.9em $ubuntu;
-    text-align: center;
-    padding: 0 30px 30px;
-    margin-bottom: 50px;
+    @extend %section-description;
     @extend %border-bottom;
   }
 
@@ -32,15 +21,15 @@
   .services-list {
 
     .name {
-      font: 400 1.85em/1.7em $myriadProRegular;
+      font: 400 1.5em/1.7em $myriadProRegular;
       margin-bottom: 15px;
       color: $dark-gray2;
 
       &:before {
         display: block;
         text-align: center;
-        font-size: 2.3em;
-        line-height: 1.9em;
+        font-size: 1.6em;
+        line-height: 1.8em;
         color: $orange;
       }
     }

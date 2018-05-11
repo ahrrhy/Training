@@ -96,6 +96,7 @@ $soft-gray: #f0f0f0;
 $soft-gray1: #cecece;
 $soft-gray2: #d5d4d3;
 $soft-gray3: #e0dddd;
+$soft-gray4: #cac6c6;
 
 $myriadProRegular: 'MyriadPro-Regular';
 $ubuntu: 'Ubuntu';
@@ -125,6 +126,24 @@ $icomoon: 'icomoon';
   }
 }
 
+%section-header {
+  font: 500 2em/1.9em $ubuntu-medium;
+  text-align: center;
+  margin-bottom: 20px;
+
+  span{
+    border-bottom: 2px solid $orange;
+    display: inline-block;
+  }
+}
+
+%section-description {
+  color: $light-gray;
+  font: 400 1.38em/1.9em $ubuntu;
+  text-align: center;
+  padding: 0 30px 30px;
+  margin-bottom: 50px;
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.

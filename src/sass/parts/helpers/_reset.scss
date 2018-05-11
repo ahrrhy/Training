@@ -39,6 +39,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 blockquote, q { quotes: none; }
 
 blockquote:before, blockquote:after,
@@ -61,7 +66,7 @@ hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin:
  * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
  */
 
-body { font:13px/1.231 sans-serif; *font-size:small; } /* Hack retained to preserve specificity */
+body { font:13px/1.231 sans-serif; } /* Hack retained to preserve specificity */
 
 /* Normalize monospace sizing:
    en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */

@@ -4,11 +4,13 @@
   background: none;
   float: right;
   display: block;
+  padding: 0;
 
   span {
     min-width: 45px;
     height: 5px;
     margin: 25px 25px 10px 0;
+    padding: 0;
     display: inline-block;
     background: $orange;
     position: relative;
