@@ -65,6 +65,11 @@
     text-align: center;
     margin: 60px auto;
 
+    a {
+      font: 500 1.84em/1.38em $ubuntu-medium;
+      color: $orange1;
+    }
+
     img {
       @extend %img-responsive;
     }
@@ -75,8 +80,6 @@
       border: 1px solid $soft-gray3;
 
       .name {
-        font: 500 1.84em/1.38em $ubuntu-medium;
-        color: $orange1;
         position: relative;
         &:after {
           content: "";
