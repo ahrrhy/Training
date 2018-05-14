@@ -1,6 +1,9 @@
-.container {
-  max-width: 100%;
+.container-fluid {
+  width: 100%;
+}
 
+.container {
+  width: auto;
 }
 
 .row::after {
@@ -29,7 +32,7 @@
 
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 576px) {
   .x-col-xs-1 {width: 10%;}
   .x-col-xs-2 {width: 20%;}
   .x-col-xs-3 {width: 30%;}
@@ -43,7 +46,11 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 576px) {
+
+  .container {
+    max-width: 580px;
+  }
 
   [class*="col-"] {
     float: left;
@@ -66,6 +73,16 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media screen and (min-width: 768px) {
+
+  .container {
+    max-width: 580px;
+  }
+
+  [class*="col-"] {
+    float: left;
+    padding: 0;
+  }
+
   .col-md-1 {width: 8.33%;}
   .col-md-2 {width: 16.66%;}
   .col-md-3 {width: 25%;}
@@ -82,6 +99,12 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media screen and (min-width: 992px) {
+
+  .container {
+    max-width: 960px;
+  }
+
+
   .col-l-1 {width: 8.33%;}
   .col-l-2 {width: 16.66%;}
   .col-l-3 {width: 25%;}
@@ -98,6 +121,12 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media screen and (min-width: 1200px) {
+
+  .container {
+    max-width: 1170px;
+  }
+
+
   .col-xl-1 {width: 8.33%;}
   .col-xl-2 {width: 16.66%;}
   .col-xl-3 {width: 25%;}
