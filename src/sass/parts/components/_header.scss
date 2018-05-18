@@ -9,7 +9,7 @@
   span {
     min-width: 45px;
     height: 5px;
-    margin: 25px 25px 10px 0;
+    margin: 35px 25px 0 0;
     padding: 0;
     display: inline-block;
     background: $orange;
@@ -51,9 +51,10 @@
 .logo {
   clear: both;
   text-align: center;
-  font: 400 5.54em/4em $myriadProRegular;
+  font: 400 5.55em/2.1em $myriadProRegular;
   color: $orange;
   text-transform: uppercase;
+  margin-bottom: 40px;
 
   span {
     text-transform: capitalize;
@@ -72,7 +73,7 @@
     text-transform: uppercase;
     text-align: center;
     color: $gray1;
-    font: 500 1.16em/.77em $ubuntu-medium;
+    font: 500 1.16em/.77em $ubuntu;
     a {
       text-decoration: none;
 

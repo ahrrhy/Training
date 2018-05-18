@@ -1,11 +1,11 @@
 .talk-to-us {
   background: $light-gray2;
   color: #fff;
-  padding: 50px 0;
+  padding: 28px 0 60px;
 
   .header {
     text-align: center;
-    font: 400 4.61em/1.84em $ubuntu;
+    font: 600 4.61em/1.84em $ubuntu;
     padding-top: 30px;
     span {
       color: $orange;
@@ -14,8 +14,9 @@
 
   p {
     text-align: center;
-    font: 400 1.84em/1.38em $myriadProRegular;
-    padding: 25px;
+    font: 400 1.84em/1.08em $myriadProRegular;
+    letter-spacing: 0.5px;
+    padding: 20px;
   }
 }
 
@@ -24,12 +25,18 @@
 
   .header {
     @extend %section-header;
-    font: 500 3.7em/1.3em $ubuntu-medium;
+    font: 550 3.4em/1.3em $ubuntu;
     margin-bottom: 60px;
   }
 
   .description {
     @extend %section-description;
+    font: 400 1.9em/1.05em $ubuntu;
+    letter-spacing: -.2px;
+    padding-right: 30px;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
   }
 
   .map-box {

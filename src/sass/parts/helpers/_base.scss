@@ -100,13 +100,12 @@ $soft-gray4: #cac6c6;
 
 $myriadProRegular: 'MyriadPro-Regular';
 $ubuntu: 'Ubuntu';
-$ubuntu-medium: 'Ubuntu-Medium';
 $icomoon: 'icomoon';
 
 /** Templates **/
 
 %img-responsive {
-  width: 100%;
+  width: auto;
   height: auto;
   display: block;
 }
@@ -127,9 +126,10 @@ $icomoon: 'icomoon';
 }
 
 %section-header {
-  font: 500 2em/1.9em $ubuntu-medium;
+  font: 700 1.9em/1.2em $ubuntu;
+  letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: .5em;
 
   span{
     border-bottom: 2px solid $orange;
@@ -139,7 +139,8 @@ $icomoon: 'icomoon';
 
 %section-description {
   color: $light-gray;
-  font: 400 1.38em/1.9em $ubuntu;
+  font: 400 1.38em/1.5em $ubuntu;
+  letter-spacing: .16px;
   text-align: center;
   padding: 0 30px 30px;
   margin-bottom: 50px;

@@ -1,5 +1,7 @@
 .main {
 
+  margin-bottom: 55px;
+
   .header {
     @extend %section-header;
   }
@@ -14,22 +16,38 @@
   }
 
   .services-section {
-    padding: 50px 0;
+    padding: 40px 0;
     @extend %border-bottom;
   }
 
   .services-list {
 
+    .item {
+      margin-bottom: 25px;
+
+      &:nth-child(2) {
+        margin-bottom: 40px;
+      }
+
+      &:nth-child(3) {
+        margin-bottom: 40px;
+      }
+
+      &:nth-child(4) {
+        margin-bottom: 5px
+      }
+    }
+
     .name {
-      font: 400 1.5em/1.7em $myriadProRegular;
-      margin-bottom: 15px;
+      font: 400 1.38em/2.2em $myriadProRegular;
       color: $dark-gray2;
+      padding-left: 0;
 
       &:before {
         display: block;
         text-align: center;
-        font-size: 1.6em;
-        line-height: 1.8em;
+        font-size: 1.25em;
+        line-height: .8em;
         color: $orange;
       }
     }
@@ -39,19 +57,26 @@
     width: 75%;
     text-align: center;
     margin: 0 auto;
-    font: 400 1.38em/1.38em $ubuntu;
+    font: 400 1.38em/1.1em $ubuntu;
     color: $light-gray;
+
+    p {
+      padding-left: 25px;
+    }
   }
 
   //projects//
 
   .recent-projects-section {
+
     .header {
-      margin-top: 80px;
+      margin-top: 78px;
     }
 
     .description {
       border-bottom: none;
+      margin-top: 20px;
+      font: 400 1.3em/1.5em $ubuntu;
     }
   }
 
@@ -60,13 +85,24 @@
     text-align: center;
   }
 
+  .item {
+    margin-bottom: 60px;
+
+    &:nth-child(2) {
+      margin-bottom: 74px;
+    }
+
+    &:nth-child(3) {
+      margin-bottom: 70px;
+    }
+  }
+
   .project {
     width: 250px;
-    text-align: center;
-    margin: 60px auto;
+    margin: 0 auto;
 
     a {
-      font: 500 1.84em/1.38em $ubuntu-medium;
+      font: 500 1.69em/1.38em $ubuntu;
       color: $orange1;
     }
 
@@ -76,7 +112,6 @@
 
     header {
       background: $light-gray1;
-      padding: 9px;
       border: 1px solid $soft-gray3;
 
       .name {
@@ -86,6 +121,7 @@
           width: 97%;
           position: absolute;
           left: 1.5%;
+          bottom: -5px;
           -ms-transform: translate(0, -6px); /* IE 9 */
           -webkit-transform: translate(0, -6px); /* Safari */
           transform: translate(0, -6px);
@@ -96,7 +132,9 @@
       }
 
       p {
-        font: 400 1.38em/1.36em $ubuntu;
+        font: 400 1.35em/1.37em $ubuntu;
+        letter-spacing: -.3px;
+        padding-bottom: 5px;
       }
     }
   }
