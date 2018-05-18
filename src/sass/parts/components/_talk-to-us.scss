@@ -22,6 +22,7 @@
 
 .contact-us-section {
   padding: 50px 0;
+  margin-bottom: 80px;
 
   .header {
     @extend %section-header;
@@ -43,6 +44,7 @@
     img {
       @extend %img-responsive;
     }
+    margin-top: 30px;
     margin-bottom: 60px;
   }
 
@@ -50,15 +52,16 @@
 
     .header {
       position: relative;
+      font: 550 3.4em/1.68em $ubuntu;
 
       &:after {
         content: "";
         display: inline-block;
         height: 2px;
-        width: 55%;
+        width: 45%;
         position: absolute;
         bottom: 0;
-        left: 22.5%;
+        left: 27.5%;
         background: $orange;
       }
     }
@@ -68,32 +71,51 @@
     @extend %reset-ul;
 
     .item {
-
-      margin: 50px 0 50px 55px;
+      margin: 80px 0 40px 55px;
+      vertical-align: middle;
 
       &:before {
         color: $orange;
-        font-size: 2.2em;
+        font-size: 2.5em;
         margin-right: 45px;
+        vertical-align: middle;
       }
 
       a {
         color: $light-gray;
-        font: 400 2.3em/2em $ubuntu;
+        font: 400 2.2em/1.5em $ubuntu;
         text-align: left;
         vertical-align: middle;
         display: inline-block;
-        width: 75%;
+        width: 65%;
+      }
+
+      a:last-child {
+        font: 400 2.1em/.95em $ubuntu;
       }
     }
 
-    .item:nth-child(2):before {
-      content: "\f003";
-      margin-right: 38px;
+    .item:nth-child(2) {
+
+      margin-top: 0;
+      margin-bottom: 60px;
+
+      &:before {
+        content: "\f003";
+        margin-right: 42px;
+        font-size: 2em;
+      }
     }
 
-    .item:last-child:before {
-      margin-right: 50px;
+    .item:last-child {
+
+      margin-top: 0;
+      margin-bottom: 30px;
+
+      &:before {
+        margin-right: 50px;
+        font-size: 2.6em;
+      }
     }
 
   }
@@ -102,11 +124,11 @@
     @extend %reset-ul;
 
     .item {
-      margin: 10px 0;
+      margin-bottom: 8px;
 
       &:last-child {
         text-align: center;
-        margin: 25px;
+        margin: 20px;
       }
     }
 
@@ -119,11 +141,10 @@
       appearance: none;
       display: inline-block;
       box-sizing: border-box;
-      width: 92%;
-      height: auto;
-      margin-left: 22px;
-      font: 400 1.23em/1.9em $ubuntu;
-      padding: 20px 16px;
+      width: 93.5%;
+      margin-left: 21px;
+      font: 400 1.23em/2.2em $ubuntu;
+      padding: 8px 14px;
 
       &::placeholder {
         color: $soft-gray4;
@@ -135,15 +156,18 @@
     textarea {
       resize: none;
       height: 170px;
+      line-height: 2.1em;
     }
 
     input[type="submit"] {
-      width: 75%;
+      width: 72.5%;
       background: $orange;
       color: #fff;
-      font: 400 1.54em/1.1em $myriadProRegular;
+      font: 400 1.54em/.6em $myriadProRegular;
       text-transform: capitalize;
-      padding: 10px;
+      margin-left: 0;
+      padding: 14px;
+      border-radius: 5px;
     }
 
   }
