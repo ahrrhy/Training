@@ -105,7 +105,7 @@ $icomoon: 'icomoon';
 /** Templates **/
 
 %img-responsive {
-  width: auto;
+  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -144,6 +144,10 @@ $icomoon: 'icomoon';
   text-align: center;
   padding: 0 30px 30px;
   margin-bottom: 50px;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 /**
