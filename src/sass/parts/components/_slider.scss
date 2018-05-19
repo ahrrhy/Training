@@ -2,18 +2,18 @@
   position: relative;
   border-top: 1px solid $soft-gray1;
   height: 405px;
-  &:before {
-    content: "<";
+
+
+  .icon-chevron-left {
     left: 20px;
     cursor: pointer;
   }
 
-  &:after {
-    content: ">";
+  .icon-chevron-right {
     right: 20px;
   }
 
-  &:after, &:before {
+  .icon-chevron-left, .icon-chevron-right {
     position: absolute;
     top: 40%;
     color: $orange;
@@ -83,7 +83,7 @@
   }
 
   .slide {
-    img {
+    .slide-img {
       @extend %img-responsive;
       width: auto;
     }

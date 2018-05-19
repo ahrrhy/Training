@@ -17,6 +17,10 @@
     font: 400 1.84em/1.08em $myriadProRegular;
     letter-spacing: 0.5px;
     padding: 20px;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
   }
 }
 
