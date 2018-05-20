@@ -9,29 +9,29 @@
 </head>
 <body>
     <header class="container">
-        <div class="row">
-            <button class="menu-toggle"><span></span></button>
+        <button class="menu-toggle"><span></span></button>
+        <nav class="row header-navigation">
             <h1 class="col-xs-12 col-md-2 logo"><a href="/">UI<span>Brush</span></a></h1>
-            <nav class="col-xs-12 col-md-10 header-navigation">
-                    <ul class="row list">
-                        <li class="x-col-xs-2 col-xs-2 item active">
-                            <a href="#">home</a>
-                        </li>
-                        <li class="x-col-xs-2 col-xs-2 item">
-                            <a href="#">about us</a>
-                        </li>
-                        <li class="x-col-xs-2 col-xs-2 item">
-                            <a href="#">services</a>
-                        </li>
-                        <li class="x-col-xs-2 col-xs-2 item">
-                            <a href="#">portfolio</a>
-                        </li>
-                        <li class="x-col-xs-2 col-xs-2 item">
-                            <a href="#">contact us</a>
-                        </li>
-                    </ul>
-            </nav>
-        </div>
+            <div class="col-xs-12 col-md-10">
+                <ul class="row list">
+                    <li class="x-col-xs-2 col-xs-2 item active">
+                        <a href="#">home</a>
+                    </li>
+                    <li class="x-col-xs-2 col-xs-2 item">
+                        <a href="#">about us</a>
+                    </li>
+                    <li class="x-col-xs-2 col-xs-2 item">
+                        <a href="#">services</a>
+                    </li>
+                    <li class="x-col-xs-2 col-xs-2 item">
+                        <a href="#">portfolio</a>
+                    </li>
+                    <li class="x-col-xs-2 col-xs-2 item">
+                        <a href="#">contact us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </header>
 
     <section class="container-fluid slider-section">
@@ -44,7 +44,13 @@
         <span class="icon-chevron-left"></span>
         <span class="icon-chevron-right"></span>
         <div class="slide">
-            <img class="img-responsive slide-img" src="./img/header-slide-big-01.jpg" alt="first-slide">
+            <picture class="img-responsive slide-img">
+                <source media="(max-width: 767px)" srcset="./img/header-slide-small-01.jpg">
+                <source media="(min-width: 768px) and (max-width: 1169px)" srcset="./img/header-slide-medium-01.jpg">
+                <source media="(min-width: 1170px)" srcset="./img/header-slide-big-01.jpg">
+                <img class="img-responsive slide-img" src="./img/header-slide-small-01.jpg" alt="first-slide">
+            </picture>
+
         </div>
         <p class="description">Lorem ipsum dolor sit amet <a href="#">consectetuer adipiscing elit</a></p>
     </section>

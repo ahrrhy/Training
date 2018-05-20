@@ -19,12 +19,12 @@ module.exports = function(grunt) {
                 undef: true,
                 eqnull: true,
                 browser: true,
-                "esversion": 6,
+                esversion: 6,
                 globals: {
                     jQuery: true,
                     $: true,
                     console: true,
-                    "esversion": 6
+                    esversion: 6
                 }
             },
             '<%= pkg.name %>': {
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
             },
 
             css: {
-                files: ['src/sass/*.scss', 'src/sass/**/*.scss'],
+                files: ['src/sass/*.scss', 'src/sass/**/*.scss', 'src/index.html'],
                 tasks: [
                     'compass',
                     'cssmin',

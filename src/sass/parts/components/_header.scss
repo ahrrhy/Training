@@ -49,14 +49,14 @@
 }
 
 .logo {
+  text-align: center;
+  margin-bottom: 40px;
   a {
     clear: both;
     text-align: center;
     font: 400 5.55em/2.1em $myriadProRegular;
     color: $orange;
     text-transform: uppercase;
-    margin-bottom: 40px;
-
     span {
       text-transform: capitalize;
       color: $gray;
@@ -68,16 +68,17 @@
 @media screen and (min-width: 768px){
   .logo {
     a {
-      font: 400 3.55em/2.1em $myriadProRegular;
+      font: 400 3.1em/2.1em $myriadProRegular;
     }
   }
 }
 
 .header-navigation {
+  vertical-align: middle;
+
   .list {
     width: 100%;
     max-width: 100%;
-    text-align: center;
     vertical-align: middle;
     display: none;
   }

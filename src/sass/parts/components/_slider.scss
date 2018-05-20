@@ -3,7 +3,6 @@
   border-top: 1px solid $soft-gray1;
   height: 405px;
 
-
   .icon-chevron-left {
     left: 20px;
     cursor: pointer;
@@ -85,7 +84,6 @@
   .slide {
     .slide-img {
       @extend %img-responsive;
-      width: auto;
     }
   }
 
@@ -107,4 +105,14 @@
     }
   }
 
+}
+
+@media screen and (min-width: 768px) {
+  .slider-section {
+    .slide {
+      .slide-img {
+        width: 100%;
+      }
+    }
+  }
 }
