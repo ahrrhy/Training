@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
 
-    <link href="css/main.min.css" rel="stylesheet" >
+    <link href="css/main.min.css" rel="stylesheet">
 
   <meta charset="UTF-8">
   <title>UIBrush</title>
 </head>
 <body>
     <header class="container">
-
         <div class="row">
-
             <button class="menu-toggle"><span></span></button>
-            <h1 class="logo">UI<span>Brush</span></h1>
-            <nav class="header-navigation">
-                <div>
-                    <ul class="row list hidden">
+            <h1 class="col-xs-12 col-md-2 logo"><a href="/">UI<span>Brush</span></a></h1>
+            <nav class="col-xs-12 col-md-10 header-navigation">
+                    <ul class="row list">
                         <li class="x-col-xs-2 col-xs-2 item active">
                             <a href="#">home</a>
                         </li>
@@ -33,13 +30,11 @@
                             <a href="#">contact us</a>
                         </li>
                     </ul>
-                </div>
-
             </nav>
         </div>
     </header>
 
-    <section class="container slider-section">
+    <section class="container-fluid slider-section">
         <h2 class="header"><span class="block">
                 <span class="inline-block">Welcome To UIBrush</span></span>
             <span class="block">
@@ -49,13 +44,7 @@
         <span class="icon-chevron-left"></span>
         <span class="icon-chevron-right"></span>
         <div class="slide">
-            <picture class="img-responsive slide-img">
-                <source srcset="img/header-slide-small-01.jpg" media="(max-width: 768px)">
-                <source srcset="img/header-slide-medium-01.jpg" media="(max-width: 1170px)">
-                <source srcset="img/header-slide-big-01.jpg" media="(max-width: 1170px)">
-                <img src="./img/header-slide-small-01.jpg" alt="first-slide">
-            </picture>
-
+            <img class="img-responsive slide-img" src="./img/header-slide-big-01.jpg" alt="first-slide">
         </div>
         <p class="description">Lorem ipsum dolor sit amet <a href="#">consectetuer adipiscing elit</a></p>
     </section>
