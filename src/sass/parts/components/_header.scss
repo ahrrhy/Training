@@ -49,8 +49,10 @@
 }
 
 .logo {
+  clear: both;
   text-align: center;
   margin-bottom: 40px;
+  display: block;
   a {
     clear: both;
     text-align: center;
@@ -65,26 +67,19 @@
 
 }
 
-@media screen and (min-width: 768px){
-  .logo {
-    float: left;
-    a {
-      font: 400 3.1em/2.1em $myriadProRegular;
-    }
-  }
-}
 
 .header-navigation {
-  vertical-align: middle;
+  text-align: center;
 
   .list {
     width: 100%;
     max-width: 100%;
-    vertical-align: middle;
     display: none;
+    text-align: right;
   }
 
   .item {
+    display: inline-block;
     text-transform: uppercase;
     text-align: center;
     color: $gray1;
@@ -113,16 +108,28 @@
 }
 
 @media screen and (min-width: 768px){
+
+  .logo {
+    float: left;
+    display: inline-block;
+    a {
+      font: 400 3.1em/2.1em $myriadProRegular;
+    }
+  }
+
   .header-navigation {
+
     .list {
       float: right;
-      display: block;
+      display: inline-block;
+      margin-top: 2.1em;
       width: 75%;
-
     }
 
     .item {
-      float: left;
+      a {
+        line-height: 2.1em;
+      }
     }
   }
 }
