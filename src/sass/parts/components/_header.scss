@@ -75,17 +75,19 @@
     width: 100%;
     max-width: 100%;
     display: none;
-    text-align: right;
+    text-align: center;
   }
 
   .item {
     display: inline-block;
+    margin: 0 15px;
     text-transform: uppercase;
     text-align: center;
     color: $gray1;
-    font: 500 1.16em/.77em $ubuntu;
+
     a {
       text-decoration: none;
+      font: 500 1.16em/.77em $ubuntu;
     }
   }
 
@@ -113,23 +115,45 @@
     float: left;
     display: inline-block;
     a {
-      font: 400 3.1em/2.1em $myriadProRegular;
+      font: 600 2.7em/2.7em $myriadProRegular;
+      letter-spacing: 3px;
     }
   }
 
   .header-navigation {
+    padding-left: 4px;
 
     .list {
       float: right;
       display: inline-block;
       margin-top: 2.1em;
-      width: 75%;
+      padding-left: 16px;
+      width: auto;
     }
 
     .item {
+
       a {
-        line-height: 2.1em;
+        font: 700 1em/2.5em $ubuntu;
+        letter-spacing: 1.3px;
       }
+    }
+
+    .active::before {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: $orange;
+    }
+
+    .active::after {
+      bottom: 0;
+      left: 40%;
+      right: 60%;
+      border-width: 6px 4px 0 4px;
     }
   }
 }
