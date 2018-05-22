@@ -19,6 +19,7 @@
     "imagemin-mozjpeg": "^7.0.0"
   },
   "dependencies": {
+    "grunt-cli": "^1.2.0",
     "jshint-stylish": "^2.2.1",
     "npm": "^6.0.0",
     "time-grunt": "^1.4.0"

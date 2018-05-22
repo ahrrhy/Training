@@ -105,7 +105,8 @@ $icomoon: 'icomoon';
 /** Templates **/
 
 %img-responsive {
-  width: auto;
+  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
 }
