@@ -8,8 +8,20 @@
 @import "parts/helpers/base";
 
 @import "parts/components/header";
+@import "parts/components/tablet/header_tablet";
+@import "parts/components/pc/header_pc";
+
 @import "parts/components/footer";
+
 @import "parts/components/slider";
+@import "parts/components/tablet/slider_tablet";
+@import "parts/components/pc/slider_pc";
+
 @import "parts/components/main";
+@import "parts/components/tablet/main_tablet";
+@import "parts/components/pc/main_pc";
+
 @import "parts/components/talk-to-us";
+@import "parts/components/tablet/talk_to_us_tablet";
+@import "parts/components/pc/talk_to_us_pc";
 

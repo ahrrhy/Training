@@ -193,6 +193,29 @@ $icomoon: 'icomoon';
   }
 }
 
+@media screen and (min-width: 1140px) {
+  %section-header {
+    font: 700 1.81em/1.82em $ubuntu;
+    letter-spacing: 1.2px;
+    margin: 8px 0 1.25em 18px;
+
+    span{
+      &:after {
+        height: 2px;
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+
+  %section-description {
+    font: 400 1.2em/1.7em $ubuntu;
+    letter-spacing: .16px;
+    padding: 0 30px 40px;
+  }
+
+}
+
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
