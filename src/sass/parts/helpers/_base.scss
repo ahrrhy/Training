@@ -151,6 +151,48 @@ $icomoon: 'icomoon';
   hyphens: auto;
 }
 
+@media screen and (min-width: 768px){
+  %border-bottom {
+    border-bottom: none;
+  }
+
+  %section-header {
+    font: 700 2.2em/1.5em $ubuntu;
+    letter-spacing: 1.2px;
+    text-align: center;
+    margin: 8px 0 1em -5px;
+
+    span{
+      border-bottom: none;
+      display: inline-block;
+      position: relative;
+
+      &:after {
+        content: "";
+        display: inline-block;
+        height: 2px;
+        width: 86%;
+        background: $orange;
+        position: absolute;
+        bottom: 0;
+        left: 7%;
+      }
+    }
+  }
+
+  %section-description {
+    font: 400 1.25em/1.6em $ubuntu;
+    letter-spacing: .16px;
+    padding: 0 70px 30px;
+    margin-bottom: 40px;
+    -moz-hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+}
+
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */

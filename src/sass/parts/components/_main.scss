@@ -139,3 +139,52 @@
     }
   }
 }
+
+@media screen and (min-width: 768px) {
+  .main {
+
+    .services-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .item {
+        margin-bottom: 60px;
+        &:first-child {
+          order: 1;
+        }
+        &:nth-child(2) {
+          order: 3;
+        }
+        &:nth-child(3) {
+          order: 4;
+        }
+        &:nth-child(4) {
+          order: 2;
+        }
+      }
+
+      .name {
+        font: 400 1.11em/2.15em $myriadProRegular;
+        text-align: center;
+        margin-bottom: 10px;
+        &:before {
+          font-size: 1.5em;
+          line-height: 1em;
+        }
+      }
+    }
+
+    .service {
+      width: 75%;
+      margin: 0 auto;
+      color: $light-gray;
+
+      p {
+        padding-left: 10px;
+        text-align: left;
+        font: 400 .66em/1.5em $ubuntu;
+      }
+    }
+  }
+}
