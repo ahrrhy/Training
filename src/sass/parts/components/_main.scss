@@ -167,7 +167,6 @@
           order: 2;
         }
       }
-
       .name {
         font: 400 1.11em/2.15em $myriadProRegular;
         margin-bottom: 10px;
@@ -177,35 +176,27 @@
         }
       }
     }
-
     .service {
-
       p {
         padding-left: 10px;
         text-align: left;
         font: 400 .66em/1.5em $ubuntu;
       }
     }
-
     .recent-projects-section {
-
       .header {
         margin-top: 0;
         margin-bottom: 16px;
       }
-
       .description {
         margin-top: 0;
         font: 400 1.2em/1.44em $ubuntu;
         margin-bottom: 15px;
       }
     }
-
     .projects-list {
-
       .item {
         margin-bottom: 52px;
-
         &:nth-child(2) {
           margin-bottom: 52px;
           margin-left: -12px;
@@ -217,6 +208,28 @@
 
         &:nth-child(4) {
           margin-left: -12px;
+        }
+      }
+    }
+    .project {
+
+      a {
+        font: 600 1.12em/2.25em $ubuntu;
+        letter-spacing: .3px;
+      }
+      header {
+        .name {
+          &:after {
+            height: 1px;
+            width: 92.5%;
+            left: 3.75%;
+          }
+        }
+
+        p {
+          font: 400 .9em/1.82em $ubuntu;
+          letter-spacing: -.1px;
+          padding-bottom: 5px;
         }
       }
     }
