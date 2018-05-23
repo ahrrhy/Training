@@ -24,6 +24,21 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  .talk-to-us {
+    margin-bottom: 5px;
+    p {
+      margin: 0 auto;
+      padding: 10px 78px 5px;
+      font: 400 1.38em/1.35em $myriadProRegular;
+      -moz-hyphens: none;
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+  }
+}
+
 .contact-us-section {
   padding: 50px 0;
   margin-bottom: 80px;
@@ -48,129 +63,237 @@
     margin-top: 30px;
     margin-bottom: 60px;
   }
+}
+
+@media screen and (min-width: 768px) {
+
+  .contact-us-section {
+    .header {
+      font: 700 2.2em/1.9em $ubuntu;
+      margin-bottom: 30px;
+    }
+
+    .description {
+      font: 400 1.25em/1.55em $ubuntu;
+      padding: 0 40px;
+      margin-bottom: 0;
+    }
+
+    .map-box {
+      img {
+        margin: 0 auto;
+        width: auto;
+      }
+    }
+  }
+}
+
+.contacts {
+
+  .header {
+    position: relative;
+    font: 550 3.4em/1.68em $ubuntu;
+
+    &:after {
+      content: "";
+      display: inline-block;
+      height: 2px;
+      width: 45%;
+      position: absolute;
+      bottom: 0;
+      left: 27.5%;
+      background: $orange;
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
 
   .contacts {
-
     .header {
-      position: relative;
-      font: 550 3.4em/1.68em $ubuntu;
+      font: 700 2.2em/1.88em $ubuntu;
 
       &:after {
-        content: "";
-        display: inline-block;
-        height: 2px;
-        width: 45%;
-        position: absolute;
-        bottom: 0;
-        left: 27.5%;
-        background: $orange;
+        width: 30%;
+        left: 35%;
       }
     }
   }
+}
 
+.contacts-list {
+  @extend %reset-ul;
+
+  .item {
+    margin: 80px 0 40px 55px;
+    vertical-align: middle;
+
+    &:before {
+      color: $orange;
+      font-size: 2.5em;
+      margin-right: 45px;
+      vertical-align: middle;
+    }
+
+    a {
+      color: $light-gray;
+      font: 400 2.2em/1.5em $ubuntu;
+      text-align: left;
+      vertical-align: middle;
+      display: inline-block;
+      width: 65%;
+    }
+  }
+
+  .item:nth-child(2) {
+    margin-top: 0;
+    margin-bottom: 60px;
+
+    &:before {
+      content: "\f003";
+      margin-right: 42px;
+      font-size: 2em;
+    }
+  }
+
+  .item:last-child {
+    margin-top: 0;
+    margin-bottom: 30px;
+
+    &:before {
+      margin-right: 50px;
+      font-size: 2.6em;
+    }
+
+    a {
+      font: 400 2.1em/.95em $ubuntu;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
   .contacts-list {
-    @extend %reset-ul;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
 
     .item {
-      margin: 80px 0 40px 55px;
-      vertical-align: middle;
-
+      margin: 0;
       &:before {
-        color: $orange;
-        font-size: 2.5em;
-        margin-right: 45px;
-        vertical-align: middle;
+        font-size: 1.8em;
+        margin-right: 20px;
       }
+      &:first-child {
+        order: 2;
 
+      }
+      &:nth-child(2) {
+        order: 3;
+        text-align: right;
+        margin-bottom: 22px;
+        &:before {
+          margin-right: 20px;
+          font-size: 1.6em;
+        }
+      }
+      &:last-child {
+        order: 1;
+        text-align: center;
+        margin-bottom: 16px;
+        &:before {
+          margin-right: 20px;
+          font-size: 1.4em;
+        }
+        a {
+          width: 35%;
+          vertical-align: top;
+          font: 400 1.24em/1.7em $ubuntu;
+        }
+      }
       a {
         color: $light-gray;
-        font: 400 2.2em/1.5em $ubuntu;
-        text-align: left;
-        vertical-align: middle;
-        display: inline-block;
+        font: 400 1.2em/1.5em $ubuntu;
         width: 65%;
       }
-
-      a:last-child {
-        font: 400 2.1em/.95em $ubuntu;
-      }
     }
+  }
+}
 
-    .item:nth-child(2) {
 
-      margin-top: 0;
-      margin-bottom: 60px;
+.form-list {
+  @extend %reset-ul;
 
-      &:before {
-        content: "\f003";
-        margin-right: 42px;
-        font-size: 2em;
-      }
+  .item {
+    margin-bottom: 8px;
+
+    &:last-child {
+      text-align: center;
+      margin: 20px;
     }
-
-    .item:last-child {
-
-      margin-top: 0;
-      margin-bottom: 30px;
-
-      &:before {
-        margin-right: 50px;
-        font-size: 2.6em;
-      }
-    }
-
   }
 
-  .form-list {
-    @extend %reset-ul;
+  input, textarea{
+    border-radius: 0;
+    border: 1px solid $soft-gray4;
+    background: $soft-gray;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 93.5%;
+    margin-left: 21px;
+    font: 400 1.23em/2.2em $ubuntu;
+    padding: 8px 14px;
 
-    .item {
-      margin-bottom: 8px;
-
-      &:last-child {
-        text-align: center;
-        margin: 20px;
-      }
-    }
-
-    input, textarea{
-      border-radius: 0;
-      border: 1px solid $soft-gray4;
-      background: $soft-gray;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
-      display: inline-block;
-      box-sizing: border-box;
-      width: 93.5%;
-      margin-left: 21px;
-      font: 400 1.23em/2.2em $ubuntu;
-      padding: 8px 14px;
-
-      &::placeholder {
-        color: $soft-gray4;
-        text-transform: capitalize;
-
-      }
-    }
-
-    textarea {
-      resize: none;
-      height: 170px;
-      line-height: 2.1em;
-    }
-
-    input[type="submit"] {
-      width: 72.5%;
-      background: $orange;
-      color: #fff;
-      font: 400 1.54em/.6em $myriadProRegular;
+    &::placeholder {
+      color: $soft-gray4;
       text-transform: capitalize;
-      margin-left: 0;
-      padding: 14px;
-      border-radius: 5px;
-    }
 
+    }
   }
 
+  textarea {
+    resize: none;
+    height: 170px;
+    line-height: 2.1em;
+  }
+
+  input[type="submit"] {
+    width: 72.5%;
+    background: $orange;
+    color: #fff;
+    font: 400 1.54em/.6em $myriadProRegular;
+    text-transform: capitalize;
+    margin-left: 0;
+    padding: 14px;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .contact-form {
+    text-align: center;
+    .form-list {
+
+      .item:last-child {
+        margin-top: 20px;
+        margin-bottom: 0;
+      }
+
+      input, textarea{
+        width: 76.5%;
+        margin-left: -8px;
+      }
+      input[type="submit"] {
+        width: 60%;
+        margin-top: 5px;
+        font: 400 1.54em/.7em $myriadProRegular;
+      }
+    }
+  }
 }

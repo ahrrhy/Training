@@ -8,3 +8,12 @@
     font: 400 1.38em/1.48em $myriadProRegular;
   }
 }
+
+@media screen and (min-width: 768px) {
+  .footer {
+    p{
+      font: 400 1.12em/1.54em $myriadProRegular;
+      letter-spacing: -.35px;
+    }
+  }
+}
