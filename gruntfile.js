@@ -28,13 +28,13 @@ module.exports = function(grunt) {
                 }
             },
             '<%= pkg.name %>': {
-                src: ['src/js/**/*.js']
+                src: ['src/js/*.js']
             }
         },
 
         concat: {
             dist: {
-                src: ['src/js/*.js', 'src/js/**/*.js'],
+                src: ['src/js/libs/jquery/dist/jquery.js', 'src/js/plugins/*.js', 'src/js/*.js'],
                 dest: 'dest/js/build.js'
             }
         },
@@ -127,16 +127,6 @@ module.exports = function(grunt) {
 
         },
 
-        // sass: {
-        //     dist: {
-        //         files: {
-        //             'src/css/ie.css': 'src/sass/ie.scss',
-        //             'src/css/print.css': 'src/sass/print.scss',
-        //             'src/css/screen.css': 'src/sass/screen.scss',
-        //         }
-        //     }
-        // },
-
         watch: {
             // options: {
             //     livereload: true
@@ -162,7 +152,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    //grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');

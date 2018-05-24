@@ -18,13 +18,13 @@
     .list {
       float: right;
       display: inline-block;
-      margin-top: 2.1em;
+      margin: 2.1em 15px 0;
       padding-left: 16px;
       width: auto;
     }
 
     .item {
-
+      margin: 0 15px;
       a {
         font: 700 1em/2.5em $ubuntu;
         letter-spacing: 1.3px;

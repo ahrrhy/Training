@@ -1,0 +1,12 @@
+#slider-wrap__slide {
+  width: 100%;
+  overflow: hidden;
+  ul {
+    position: relative;
+    width: 99999px;
+    li {
+      width: 100vw;
+      float: left;
+    }
+  }
+}

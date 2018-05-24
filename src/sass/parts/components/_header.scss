@@ -1,6 +1,7 @@
 .menu-toggle {
   border-radius: 0;
   border: none;
+  outline: none;
   background: none;
   float: right;
   display: block;
@@ -70,11 +71,12 @@
     max-width: 100%;
     display: none;
     text-align: center;
+    transition: all ease .5s;
   }
 
   .item {
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 5px;
     text-transform: uppercase;
     text-align: center;
     color: $gray1;
