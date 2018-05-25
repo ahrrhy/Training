@@ -10,3 +10,18 @@
     }
   }
 }
+
+.grayscale {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+
+.sepia {
+  -webkit-filter: sepia(1);
+  filter: sepia(1);
+}
+
+.saturate {
+  -webkit-filter: saturate(8);
+  filter: saturate(8);
+}
