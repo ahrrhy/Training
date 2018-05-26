@@ -24,8 +24,7 @@ module.exports = function(grunt) {
                     jQuery: true,
                     $: true,
                     console: true,
-                    esversion: 6
-                }
+                },
             },
             '<%= pkg.name %>': {
                 src: ['src/js/*.js']

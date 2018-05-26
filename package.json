@@ -16,7 +16,8 @@
     "grunt-contrib-uglify": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-remove-logging": "^0.2.0",
-    "imagemin-mozjpeg": "^7.0.0"
+    "imagemin-mozjpeg": "^7.0.0",
+    "uglify-js-es6": "^2.8.9"
   },
   "dependencies": {
     "grunt-cli": "^1.2.0",
