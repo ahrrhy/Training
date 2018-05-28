@@ -10388,31 +10388,31 @@ return jQuery;
             options = $.extend(defaults, options),
             $this = $(this);
 
-
-
         $this.each(function () {
 
-            var nextBtn = $(options.controlNext),
-                prevBtn = $(options.controlPrev);
-
-
-            var items = function() { return $this.find('li'); },
-                activeSlide = function() { return items().filter('.active')},
-                nextSlide = function () { return activeSlide().next(); },
-                prevSlide = function () { return activeSlide().prev() },
-                firstSlide = function () { return items().first() },
-                lastSlide = function () { return items().last()};
             /**
              * This is the slide animation case
              */
 
             if (options.transition === 'slide') {
 
+                var nextBtn = $(options.controlNext),
+                    prevBtn = $(options.controlPrev);
+
+                var $this = $(this);
+
+                var items = function() { return $this.find('li'); },
+                    activeSlide = function() { return items().filter('.active')},
+                    nextSlide = function () { return activeSlide().next(); },
+                    prevSlide = function () { return activeSlide().prev() },
+                    firstSlide = function () { return items().first() },
+                    lastSlide = function () { return items().last()};
+
                 var wrap = '<div class="slider-wrap__slide"></div>';
                 $this.wrap(wrap);
 
-                $this.width(activeSlide().width()*items().length);
-                $this.css('marginLeft', -nextSlide().width());
+                $this.width(activeSlide().width() *items().length);
+                $this.css('marginLeft', -activeSlide().width());
                 lastSlide().prependTo($this);
 
                 var start;
@@ -10434,18 +10434,12 @@ return jQuery;
                     if (options.direction === 'forward') {
                         start = setInterval(function () {
                             nextSlideMove();
-                            console.log(activeSlide());
                         }, options.pause);
-
-
                     }
                     if (options.direction === 'backward') {
                         start = setInterval(function () {
                             prevSlideMove();
-                            console.log(activeSlide());
                         }, options.pause);
-
-
                     }
                 }
 
@@ -10464,8 +10458,9 @@ return jQuery;
                         $this.css('left', '');
                         activeSlide().removeClass('active').prev().addClass('active');
                     });
-
                 }
+
+                return this;
             }
 
             if (options.transition === 'fade') {
@@ -10480,6 +10475,6 @@ $(document).ready(function () {
 
     $('.header-slider-list').dvSlider({'transition' : 'slide'});
 
-    $('.footer-slider-list').dvSlider();
+    $('.footer-slider-list').dvSlider({'pause' : '2000'});
 
 });
