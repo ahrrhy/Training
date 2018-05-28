@@ -3,6 +3,6 @@ $(document).ready(function () {
 
     $('.header-slider-list').dvSlider({'transition' : 'slide'});
 
-    $('.footer-slider-list').dvSlider({'direction' : 'forward'});
+    $('.footer-slider-list').dvSlider({'transition' : 'slide'});
 
 });

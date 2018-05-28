@@ -10383,7 +10383,7 @@ return jQuery;
     $.fn.dvSlider = function (options) {
         var defaults = {
            speed : 2000,
-           pause : 10000,
+           pause : 5000,
            transition : 'slide',
            direction: 'backward',
            controlPrev: '.previous-slide',
@@ -10395,7 +10395,6 @@ return jQuery;
 
         this.each(function () {
             var $this = $(this);
-            console.log(this);
 
             /**
              * This is the slide animation case
@@ -10405,14 +10404,25 @@ return jQuery;
                 var wrap = '<div class="slider-wrap__slide"></div>';
                 $this.wrap(wrap);
 
-                var currentSliderPosition = 0,
-                    items = function() { return $this.find('li'); },
+                var items = function() { return $this.find('li'); },
                     activeSlide = function() { return items().filter('.active')},
                     nextSlide = function () { return activeSlide().next(); },
-                    prevSlide = function () { return activeSlide().prev() },
                     firstSlide = function () { return items().first() },
                     lastSlide = function () { return items().last()};
+
+
                 $this.width(nextSlide().width() * items().length);
+
+                console.log($this);
+
+                console.log($this.width());
+                $this.css({
+                    width : nextSlide().width() * items().length,
+                    marginLeft: - nextSlide().width()
+                });
+                lastSlide().prependTo($this);
+
+
 
                 var start;
 
@@ -10442,31 +10452,20 @@ return jQuery;
                     }
                 }
 
-
                 function nextSlideMove() {
-                    console.log(1);
-                    if (nextSlide().length) {
-                        $this.animate({ right: currentSliderPosition + nextSlide().width() }, options.speed);
-                        currentSliderPosition += nextSlide().width();
-                        activeSlide().removeClass('active').next().addClass('active');
-                    } else {
-                        activeSlide().removeClass('active');
-                        firstSlide().addClass('active');
-                        $this.animate({ right: currentSliderPosition = 0 }, options.speed);
-                    }
+                    $this.animate({ left: - nextSlide().width() }, options.speed, function () {
+                        firstSlide().appendTo($this);
+                        $this.css('left', '');
+                    });
+                    activeSlide().removeClass('active').next().addClass('active');
                 }
 
                 function prevSlideMove() {
-
-                    if (prevSlide().length) {
-                        $this.animate({ right: currentSliderPosition - prevSlide().width() }, options.speed);
-                        currentSliderPosition -= prevSlide().width();
-                        activeSlide().removeClass('active').prev().addClass('active');
-                    } else {
-                        activeSlide().removeClass('active');
-                        lastSlide().addClass('active');
-                        $this.animate({ right: currentSliderPosition = $this.width() - activeSlide().width() }, options.speed);
-                    }
+                    $this.animate({ left: + nextSlide().width() }, options.speed, function () {
+                        lastSlide().prependTo($this);
+                        $this.css('left', '');
+                    });
+                    activeSlide().removeClass('active').prev().addClass('active');
                 }
             }
 
@@ -10481,6 +10480,6 @@ $(document).ready(function () {
 
     $('.header-slider-list').dvSlider({'transition' : 'slide'});
 
-    $('.footer-slider-list').dvSlider({'direction' : 'forward'});
+    $('.footer-slider-list').dvSlider({'transition' : 'slide'});
 
 });
