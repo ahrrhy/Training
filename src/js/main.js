@@ -1,8 +1,10 @@
 $(document).ready(function () {
     $('.menu-toggle').menuToggle('.header-navigation .list');
 
-    $('.header-slider-list').dvSlider({'transition' : 'slide'});
+    $('.header-slider-list').dvSlider({'transition' : 'fade'});
 
-    $('.footer-slider-list').dvSlider({'pause' : '2000'});
+    $('.footer-slider-list').dvSlider({
+        'transition' : 'fade',
+        'pause' : '2000'});
 
 });

@@ -18,34 +18,17 @@
   }
 }
 
-.footer-slider-box, .footer2-slider-box {
-  background: #fff;
-  position: relative;
-
-  .footer-slider-list {
+.footer-slider-box {
+  width: 100%;
+  height: 100vw;
+  overflow: hidden;
+  ul {
     @extend %reset-ul;
-    .item {
-      height: 500px;
+  }
 
-      &:first-child {
-        background: #003366;
-      }
-
-      &:nth-child(2) {
-        background: #f8a48c;
-      }
-
-      &:nth-child(3) {
-        background: #444444;
-      }
-
-      &:last-child {
-        background: #999999;
-      }
-
-      img {
-        @extend %img-responsive;
-      }
-    }
+  img {
+    @extend %img-responsive;
+    //width: 100vw;
+    //height: 100vw;
   }
 }

@@ -13,20 +13,22 @@
 }
 
 .slider-wrap__fade {
-  width: 100%;
-
+  position: relative;
+  margin: 0 auto;
   ul {
-    position: relative;
-
     li {
+      margin: 0 auto;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
     }
 
+    li.active {
+      z-index: 1000;
+    }
   }
 }
 
