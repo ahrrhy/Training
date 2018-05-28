@@ -10375,54 +10375,45 @@ return jQuery;
         });
     };
 })(jQuery);
-/**
- * This is simple jQuery slider plugin
- *
- * */
 ;(function ($) {
     $.fn.dvSlider = function (options) {
         var defaults = {
-           speed : 2000,
-           pause : 5000,
-           transition : 'slide',
-           direction: 'backward',
-           controlPrev: '.previous-slide',
-           controlNext: '.next-slide'
-        },
-           options = $.extend(defaults, options),
-           nextBtn = $(options.controlNext),
-           prevBtn = $(options.controlPrev);
+                speed : 2000,
+                pause : 5000,
+                transition : 'slide',
+                direction: 'forward',
+                controlPrev: '.previous-slide',
+                controlNext: '.next-slide'
+            },
+            options = $.extend(defaults, options),
+            $this = $(this);
 
-        this.each(function () {
-            var $this = $(this);
 
+
+        $this.each(function () {
+
+            var nextBtn = $(options.controlNext),
+                prevBtn = $(options.controlPrev);
+
+
+            var items = function() { return $this.find('li'); },
+                activeSlide = function() { return items().filter('.active')},
+                nextSlide = function () { return activeSlide().next(); },
+                prevSlide = function () { return activeSlide().prev() },
+                firstSlide = function () { return items().first() },
+                lastSlide = function () { return items().last()};
             /**
              * This is the slide animation case
              */
 
             if (options.transition === 'slide') {
+
                 var wrap = '<div class="slider-wrap__slide"></div>';
                 $this.wrap(wrap);
 
-                var items = function() { return $this.find('li'); },
-                    activeSlide = function() { return items().filter('.active')},
-                    nextSlide = function () { return activeSlide().next(); },
-                    firstSlide = function () { return items().first() },
-                    lastSlide = function () { return items().last()};
-
-
-                $this.width(nextSlide().width() * items().length);
-
-                console.log($this);
-
-                console.log($this.width());
-                $this.css({
-                    width : nextSlide().width() * items().length,
-                    marginLeft: - nextSlide().width()
-                });
+                $this.width(activeSlide().width()*items().length);
+                $this.css('marginLeft', -nextSlide().width());
                 lastSlide().prependTo($this);
-
-
 
                 var start;
 
@@ -10443,12 +10434,18 @@ return jQuery;
                     if (options.direction === 'forward') {
                         start = setInterval(function () {
                             nextSlideMove();
+                            console.log(activeSlide());
                         }, options.pause);
+
+
                     }
                     if (options.direction === 'backward') {
                         start = setInterval(function () {
                             prevSlideMove();
+                            console.log(activeSlide());
                         }, options.pause);
+
+
                     }
                 }
 
@@ -10456,21 +10453,24 @@ return jQuery;
                     $this.animate({ left: - nextSlide().width() }, options.speed, function () {
                         firstSlide().appendTo($this);
                         $this.css('left', '');
+                        activeSlide().removeClass('active').next().addClass('active');
                     });
-                    activeSlide().removeClass('active').next().addClass('active');
+
                 }
 
                 function prevSlideMove() {
-                    $this.animate({ left: + nextSlide().width() }, options.speed, function () {
+                    $this.animate({ left: + prevSlide().width() }, options.speed, function () {
                         lastSlide().prependTo($this);
                         $this.css('left', '');
+                        activeSlide().removeClass('active').prev().addClass('active');
                     });
-                    activeSlide().removeClass('active').prev().addClass('active');
+
                 }
             }
 
             if (options.transition === 'fade') {
-
+                var wrap = '<div class="slider-wrap__fade"></div>';
+                $this.wrap(wrap);
             }
         });
     };
@@ -10480,6 +10480,6 @@ $(document).ready(function () {
 
     $('.header-slider-list').dvSlider({'transition' : 'slide'});
 
-    $('.footer-slider-list').dvSlider({'transition' : 'slide'});
+    $('.footer-slider-list').dvSlider();
 
 });
