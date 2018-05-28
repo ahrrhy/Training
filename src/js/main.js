@@ -1,5 +1,8 @@
 $(document).ready(function () {
     $('.menu-toggle').menuToggle('.header-navigation .list');
 
-    $('.slider-list').dvSlider({'transition' : 'slide'});
+    $('.header-slider-list').dvSlider({'transition' : 'slide'});
+
+    $('.footer-slider-list').dvSlider({'direction' : 'forward'});
+
 });

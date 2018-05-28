@@ -17,3 +17,33 @@
     }
   }
 }
+
+.footer-slider-box {
+  background: #fff;
+  position: relative;
+
+  .footer-slider-list {
+    @extend %reset-ul;
+    .item {
+      height: 400px;
+      width: 100%;
+      text-align: center;
+
+      &:first-child {
+        background: #003366;
+      }
+
+      &:nth-child(2) {
+        background: #f8a48c;
+      }
+
+      &:nth-child(3) {
+        background: #444444;
+      }
+
+      &:last-child {
+        background: #999999;
+      }
+    }
+  }
+}

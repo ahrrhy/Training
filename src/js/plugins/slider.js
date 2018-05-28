@@ -6,7 +6,7 @@
     $.fn.dvSlider = function (options) {
         var defaults = {
            speed : 2000,
-           pause : 5000,
+           pause : 10000,
            transition : 'slide',
            direction: 'backward',
            controlPrev: '.previous-slide',
@@ -18,13 +18,14 @@
 
         this.each(function () {
             var $this = $(this);
+            console.log(this);
 
             /**
              * This is the slide animation case
              */
 
             if (options.transition === 'slide') {
-                var wrap = '<div id="slider-wrap__slide"></div>';
+                var wrap = '<div class="slider-wrap__slide"></div>';
                 $this.wrap(wrap);
 
                 var currentSliderPosition = 0,

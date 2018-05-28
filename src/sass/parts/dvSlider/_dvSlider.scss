@@ -1,12 +1,13 @@
-#slider-wrap__slide {
+.slider-wrap__slide {
   width: 100%;
   overflow: hidden;
   ul {
     position: relative;
     width: 9900px;
     li {
-      width: 100vw;
-      float: left;
+      width: 100vw!important;
+      float: left!important;
+      text-align: center!important;
     }
   }
 }
