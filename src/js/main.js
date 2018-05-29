@@ -7,4 +7,3 @@ $(document).ready(function () {
         'transition' : 'fade'});
 
 });
-let a =8;

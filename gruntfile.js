@@ -34,21 +34,17 @@ module.exports = function(grunt) {
         browserify: {
             dist: {
                 files: {
-                    'src/js/build.js': 'src/js/main.js',
-                    'src/js/plugins/': 'src/js/plugins/*.js'
+                    'src/js/plugins/slider-es5.js': 'src/js/plugins/slider.js'
                 },
                 options: {
-                    transform: [['babelify', { presets: "es2015" }]],
-                    browserifyOptions: {
-                        debug: true
-                    }
+                    transform: [['babelify', { presets: "es2015" }]]
                 }
             }
         },
 
         concat: {
             dist: {
-                src: ['src/js/libs/jquery/dist/jquery.js', 'src/js/plugins/*.js', 'src/js/build.js'],
+                src: ['src/js/libs/jquery/dist/jquery.js', 'src/js/plugins/menu-toggler.js', 'src/js/plugins/slider-es5.js', 'src/js/main.js'],
                 dest: 'dest/js/build.js'
             }
         },

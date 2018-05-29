@@ -10375,367 +10375,205 @@ return jQuery;
         });
     };
 })(jQuery);
-;(function ($, window, document, undefined) {
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+'use strict';
 
-    var pluginName = 'dvSlider',
+;(function ($) {
+    $.fn.dvSlider = function (options) {
+
         /**
          * @type {{speed: number, pause: number, transition: string, direction: string, controlPrev: string, controlNext: string}}
          */
-        defaults = {
-            /**
-             * speed number, animation speed
-             * pause number, time to change slide in auto sliding
-             * transition string, determine type of animation
-             * direction string, direction of auto sliding: "forward" "backward"
-             * controlPrev string, css selector of element with click event, set from parents node to this selector
-             * controlNext string, css selector of element with click event, set from parents node to this selector
-             */
-            speed : 2000,
-            pause : 5000,
-            transition : 'slide',
+        var defaults = {
+            // animation speed
+            speed: 2000,
+            // animation pause time
+            pause: 5000,
+            //animation type
+            transition: 'slide',
+            //auto animating direction
             direction: 'forward',
+            //control elements selectors
             controlPrev: '.previous-slide',
             controlNext: '.next-slide'
-        };
+        },
+            options = $.extend(defaults, options),
+            $this = $(this);
 
-        class Slider{
+        var wrap;
+        var start;
 
-            constructor(element, options) {
-                // Save the element reference, both as a jQuery
-                // reference and a normal reference
-                this.element = element;
-                this.$element = $(element);
-
-                this.start = null;
-
-                // Mix in the passed-in options with the default options
-                this.options = $.extend({}, defaults, options);
-                this._defaults = defaults;
-
-                // Set slider wraps with basic sliders styles
-                this._wrapSlide = '<div class="slider-wrap__slide"></div>';
-                this._wrapFade = '<div class="slider-wrap__fade"></div>';
-            }
-
-            init() {
-
-                //Find control elements in DOM
-                this.nextBtn = $(defaults.controlNext);
-                this.prevBtn = $(defaults.controlPrev);
-
-                this.build();
-                this.findActive(this.$element);
-
-            }
-
-            //Wraps Slider element in order of slider animation type
-            build() {
-
-                if (this._defaults === 'fade') {
-
-                    //Wrap slider-list in correct wrap
-                    this.$element.wrap(this._wrapFade);
-
-                    //Starting slides auto change
-                    this.autoFade();
-                }
-
-                if (this._defaults === 'slide') {
-
-                    //Wrap slider-list in correct wrap
-                    this.$element.wrap(this._wrapSlide);
-
-                    //Setting width for slider-list and margin-left
-                    this.$element.width(this.activeSlide().width() * this.items().length);
-                    this.$element.css('marginLeft', - this.activeSlide().width());
-                    this.lastSlide().prependTo(this.$element);
-
-                    //Starting slides auto change
-                    this.autoSlide();
-                }
-            }
-
-            //Check if any Slider li element has active class and set it if not
-            findActive(parent) {
-                let active = $('.active', parent);
-                if (active[0]) {
-                    return;
-                }
-                parent.find('li').first().addClass('active');
-            }
-
-
-            //Work with slider's li
-            items() {
-                return this.$element.find('li');
-            }
-            activeSlide() {
-                return this.items().filter('.active');
-            }
-            nextSlide() {
-                return this.activeSlide().next();
-            }
-            prevSlide() {
-                return this.activeSlide().prev();
-            }
-            firstSlide() {
-                return this.items().first();
-            }
-            lastSlide() {
-                return this.items().last();
-            }
-
-            //Slider moves functions
-
-            nextSlideMove() {
-                this.$element.animate({ left: - this.nextSlide().width() }, this._defaults.speed,  () => {
-                    this.firstSlide().appendTo(this.$element);
-                    this.$element.css('left', '');
-                    this.activeSlide().removeClass('active').next().addClass('active');
-                });
-            }
-
-            prevSlideMove() {
-                this.$element.animate({ left: + this.prevSlide().width() }, this._defaults.speed,  () => {
-                    this.lastSlide().prependTo(this.$element);
-                    this.$element.css('left', '');
-                    this.activeSlide().removeClass('active').prev().addClass('active');
-                });
-            }
-
-            nextFadeMove() {
-                this.nextSlide().css('zIndex', +this.activeSlide().css('zIndex') - 1);
-                this.activeSlide().animate({ opacity: 0 }, this._defaults.speed,  () => {
-                    this.activeSlide().css('opacity', 1).removeClass('active').next().addClass('active');
-                    this.firstSlide().appendTo(this.$element);
-                    this.firstSlide().css('zIndex','');
-                });
-            }
-
-            prevFadeMove() {
-                this.lastSlide().css('zIndex', +this.activeSlide().css('zIndex')-1);
-                this.activeSlide().animate({ opacity: 0 }, this._defaults.speed,  () => {
-                    this.lastSlide().prependTo(this.$element);
-                    this.activeSlide().css('opacity', '').removeClass('active');
-                    this.firstSlide().addClass('active').css('zIndex', '');
-                });
-            }
-
-            autoSlide() {
-                if (options.direction === 'forward') {
-                    this.start = setInterval( () => {
-                        this.nextSlideMove();
-                    }, options.pause);
-                }
-                if (options.direction === 'backward') {
-                    this.start = setInterval( () => {
-                        this.prevSlideMove();
-                    }, options.pause);
-                }
-            }
-
-            autoFade() {
-                if (options.direction === 'forward') {
-                    this.start = setInterval( () => {
-                        this.nextFadeMove();
-                    }, options.pause);
-                }
-                if (options.direction === 'backward') {
-                    this.start = setInterval( () => {
-                        this.prevFadeMove();
-                    }, options.pause);
-                }
-            }
+        //Check if animation pause is bigger than animation speed
+        if (options.speed === options.pause) {
+            options.pause += 300;
         }
 
-    $.fn[pluginName] = function ( options ) {
-        return this.each(function () {
-            if (!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName,
-                    new Slider( this, options ));
+        //Check if active slide exist
+        function findActive(parent) {
+            var active = $('.active', parent);
+            if (active[0]) {
+                return;
+            }
+            parent.find('li').first().addClass('active');
+        }
+
+        //Setting active for every slider which doesn't have it
+        $this.each(function () {
+            findActive($this);
+        });
+
+        $this.each(function () {
+
+            //Setting controls elements
+            var nextBtn = $(options.controlNext),
+                prevBtn = $(options.controlPrev);
+
+            var $this = $(this);
+
+            //Find all needed slides
+            var items = function items() {
+                return $this.find('li');
+            },
+                activeSlide = function activeSlide() {
+                return items().filter('.active');
+            },
+                nextSlide = function nextSlide() {
+                return activeSlide().next();
+            },
+                prevSlide = function prevSlide() {
+                return activeSlide().prev();
+            },
+                firstSlide = function firstSlide() {
+                return items().first();
+            },
+                lastSlide = function lastSlide() {
+                return items().last();
+            };
+            /**
+             * This is the slide animation case
+             */
+
+            if (options.transition === 'slide') {
+                var _autoSlide = function _autoSlide() {
+                    if (options.direction === 'forward') {
+                        start = setInterval(function () {
+                            nextSlideMove();
+                        }, options.pause);
+                    }
+                    if (options.direction === 'backward') {
+                        start = setInterval(function () {
+                            prevSlideMove();
+                        }, options.pause);
+                    }
+                };
+
+                var nextSlideMove = function nextSlideMove() {
+                    $this.animate({ left: -nextSlide().width() }, options.speed, function () {
+                        firstSlide().appendTo($this);
+                        $this.css('left', '');
+                        activeSlide().removeClass('active').next().addClass('active');
+                    });
+                };
+
+                var prevSlideMove = function prevSlideMove() {
+                    $this.animate({ left: +prevSlide().width() }, options.speed, function () {
+                        lastSlide().prependTo($this);
+                        $this.css('left', '');
+                        activeSlide().removeClass('active').prev().addClass('active');
+                    });
+                };
+
+                //Wrap slider for correctly styled div
+                wrap = '<div class="slider-wrap__slide"></div>';
+                $this.wrap(wrap);
+
+                //Setting sliders real width
+                $this.width(activeSlide().width() * items().length);
+                $this.css('marginLeft', -activeSlide().width());
+                lastSlide().prependTo($this);
+
+                //Start auto slide change
+                _autoSlide();
+
+                //Catching click events on control elements
+                nextBtn.on('click', function () {
+                    clearInterval(start);
+                    nextSlideMove();
+                    _autoSlide();
+                });
+                prevBtn.on('click', function () {
+                    clearInterval(start);
+                    prevSlideMove();
+                    _autoSlide();
+                });
+
+                return this;
+            }
+
+            /**
+             * Case fade animation
+             */
+
+            if (options.transition === 'fade') {
+                var autoFade = function autoFade() {
+                    if (options.direction === 'forward') {
+                        start = setInterval(function () {
+                            nextFadeMove();
+                        }, options.pause);
+                    }
+                    if (options.direction === 'backward') {
+                        start = setInterval(function () {
+                            prevFadeMove();
+                        }, options.pause);
+                    }
+                };
+
+                var nextFadeMove = function nextFadeMove() {
+                    nextSlide().css('zIndex', +activeSlide().css('zIndex') - 1);
+                    activeSlide().animate({ opacity: 0 }, options.speed, function () {
+                        activeSlide().css('opacity', '').removeClass('active').next().addClass('active');
+                        firstSlide().appendTo($this);
+                        firstSlide().css('zIndex', '');
+                    });
+                };
+
+                var prevFadeMove = function prevFadeMove() {
+                    lastSlide().css('zIndex', +activeSlide().css('zIndex') - 1);
+                    activeSlide().animate({ opacity: 0 }, options.speed, function () {
+                        lastSlide().prependTo($this);
+                        activeSlide().css('opacity', '').removeClass('active');
+                        firstSlide().addClass('active').css('zIndex', '');
+                    });
+                };
+
+                wrap = '<div class="slider-wrap__fade"></div>';
+                $this.wrap(wrap);
+
+                autoFade();
+
+                nextBtn.on('click', function () {
+                    clearInterval(start);
+                    nextFadeMove();
+                    autoSlide();
+                });
+                prevBtn.on('click', function () {
+                    clearInterval(start);
+                    prevFadeMove();
+                    autoSlide();
+                });
             }
         });
     };
+})(jQuery);
 
-
-        ////*******************************////
-    //
-    // $.fn.dvSlider = function (options) {
-    //
-    //     /**
-    //      * @type {{speed: number, pause: number, transition: string, direction: string, controlPrev: string, controlNext: string}}
-    //      */
-    //     var defaults = {
-    //             speed : 2000,
-    //             pause : 5000,
-    //             transition : 'slide',
-    //             direction: 'forward',
-    //             controlPrev: '.previous-slide',
-    //             controlNext: '.next-slide'
-    //         },
-    //         options = $.extend(defaults, options),
-    //         $this = $(this);
-    //
-    //     var wrap;
-    //     var start;
-    //
-    //     if (options.speed === options.pause) {
-    //         options.pause += 300;
-    //     }
-    //
-    //     function findActive(parent) {
-    //         var active = $('.active', parent);
-    //         if (active[0]) {
-    //             return;
-    //         }
-    //         parent.find('li').first().addClass('active');
-    //     }
-    //
-    //     $this.each(function () {
-    //         findActive($this);
-    //     });
-    //
-    //     $this.each(function () {
-    //
-    //         var nextBtn = $(options.controlNext),
-    //             prevBtn = $(options.controlPrev);
-    //
-    //         var $this = $(this);
-    //
-    //         var items = function() { return $this.find('li'); },
-    //             activeSlide = function() { return items().filter('.active') },
-    //             nextSlide = function () { return activeSlide().next(); },
-    //             prevSlide = function () { return activeSlide().prev() },
-    //             firstSlide = function () { return items().first() },
-    //             lastSlide = function () { return items().last() };
-    //         /**
-    //          * This is the slide animation case
-    //          */
-    //
-    //         if (options.transition === 'slide') {
-    //
-    //             findActive($this);
-    //
-    //             wrap = '<div class="slider-wrap__slide"></div>';
-    //             $this.wrap(wrap);
-    //
-    //             $this.width(activeSlide().width() *items().length);
-    //             $this.css('marginLeft', -activeSlide().width());
-    //             lastSlide().prependTo($this);
-    //
-    //             autoSlide();
-    //
-    //             nextBtn.on('click', function() {
-    //                 clearInterval(start);
-    //                 nextSlideMove();
-    //                 autoSlide();
-    //             });
-    //             prevBtn.on('click', function() {
-    //                 clearInterval(start);
-    //                 prevSlideMove();
-    //                 autoSlide();
-    //             });
-    //
-    //             function autoSlide() {
-    //                 if (options.direction === 'forward') {
-    //                     start = setInterval(function () {
-    //                         nextSlideMove();
-    //                     }, options.pause);
-    //                 }
-    //                 if (options.direction === 'backward') {
-    //                     start = setInterval(function () {
-    //                         prevSlideMove();
-    //                     }, options.pause);
-    //                 }
-    //             }
-    //
-    //             function nextSlideMove() {
-    //                 $this.animate({ left: - nextSlide().width() }, options.speed, function () {
-    //                     firstSlide().appendTo($this);
-    //                     $this.css('left', '');
-    //                     activeSlide().removeClass('active').next().addClass('active');
-    //                 });
-    //
-    //             }
-    //
-    //             function prevSlideMove() {
-    //                 $this.animate({ left: + prevSlide().width() }, options.speed, function () {
-    //                     lastSlide().prependTo($this);
-    //                     $this.css('left', '');
-    //                     activeSlide().removeClass('active').prev().addClass('active');
-    //                 });
-    //             }
-    //
-    //             return this;
-    //         }
-    //
-    //         /**
-    //          * Case fade animation
-    //          */
-    //
-    //         if (options.transition === 'fade') {
-    //             wrap = '<div class="slider-wrap__fade"></div>';
-    //             $this.wrap(wrap);
-    //
-    //             autoFade();
-    //
-    //             nextBtn.on('click', function() {
-    //                 clearInterval(start);
-    //                 nextFadeMove();
-    //                 autoSlide();
-    //             });
-    //             prevBtn.on('click', function() {
-    //                 clearInterval(start);
-    //                 prevFadeMove();
-    //                 autoSlide();
-    //             });
-    //
-    //             function autoFade() {
-    //                 if (options.direction === 'forward') {
-    //                     start = setInterval(function () {
-    //                         nextFadeMove();
-    //                     }, options.pause);
-    //                 }
-    //                 if (options.direction === 'backward') {
-    //                     start = setInterval(function () {
-    //                         prevFadeMove();
-    //                     }, options.pause);
-    //                 }
-    //             }
-    //
-    //             function nextFadeMove() {
-    //                 nextSlide().css('zIndex', +activeSlide().css('zIndex') - 1);
-    //                 activeSlide().animate({opacity: 0}, options.speed, function () {
-    //                     activeSlide().css('opacity', '').removeClass('active').next().addClass('active');
-    //                     firstSlide().appendTo($this);
-    //                     firstSlide().css('zIndex','');
-    //                 });
-    //             }
-    //
-    //             function prevFadeMove() {
-    //                 lastSlide().css('zIndex', +activeSlide().css('zIndex')-1);
-    //                 activeSlide().animate({opacity: 0}, options.speed, function () {
-    //                     lastSlide().prependTo($this);
-    //                     activeSlide().css('opacity', '').removeClass('active');
-    //                     firstSlide().addClass('active').css('zIndex', '');
-    //                 })
-    //             }
-    //         }
-    //     });
-    // };
-})(jQuery, window, document);
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-'use strict';
+},{}]},{},[1]);
 
 $(document).ready(function () {
     $('.menu-toggle').menuToggle('.header-navigation .list');
 
-    $('.header-slider-list').dvSlider({ 'transition': 'slide' });
+    $('.header-slider-list').dvSlider({'transition' : 'slide'});
 
     $('.footer-slider-list').dvSlider({
-        'transition': 'fade' });
-});
-var a = 8;
+        'transition' : 'fade'});
 
-},{}]},{},[1])
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5vZGVfbW9kdWxlcy9icm93c2VyLXBhY2svX3ByZWx1ZGUuanMiLCJzcmMvanMvbWFpbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0FDQUEsRUFBRSxRQUFGLEVBQVksS0FBWixDQUFrQixZQUFZO0FBQzFCLE1BQUUsY0FBRixFQUFrQixVQUFsQixDQUE2QiwwQkFBN0I7O0FBRUEsTUFBRSxxQkFBRixFQUF5QixRQUF6QixDQUFrQyxFQUFDLGNBQWUsT0FBaEIsRUFBbEM7O0FBRUEsTUFBRSxxQkFBRixFQUF5QixRQUF6QixDQUFrQztBQUM5QixzQkFBZSxNQURlLEVBQWxDO0FBR0gsQ0FSRDtBQVNBLElBQUksSUFBRyxDQUFQIiwiZmlsZSI6ImdlbmVyYXRlZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24oKXtmdW5jdGlvbiByKGUsbix0KXtmdW5jdGlvbiBvKGksZil7aWYoIW5baV0pe2lmKCFlW2ldKXt2YXIgYz1cImZ1bmN0aW9uXCI9PXR5cGVvZiByZXF1aXJlJiZyZXF1aXJlO2lmKCFmJiZjKXJldHVybiBjKGksITApO2lmKHUpcmV0dXJuIHUoaSwhMCk7dmFyIGE9bmV3IEVycm9yKFwiQ2Fubm90IGZpbmQgbW9kdWxlICdcIitpK1wiJ1wiKTt0aHJvdyBhLmNvZGU9XCJNT0RVTEVfTk9UX0ZPVU5EXCIsYX12YXIgcD1uW2ldPXtleHBvcnRzOnt9fTtlW2ldWzBdLmNhbGwocC5leHBvcnRzLGZ1bmN0aW9uKHIpe3ZhciBuPWVbaV1bMV1bcl07cmV0dXJuIG8obnx8cil9LHAscC5leHBvcnRzLHIsZSxuLHQpfXJldHVybiBuW2ldLmV4cG9ydHN9Zm9yKHZhciB1PVwiZnVuY3Rpb25cIj09dHlwZW9mIHJlcXVpcmUmJnJlcXVpcmUsaT0wO2k8dC5sZW5ndGg7aSsrKW8odFtpXSk7cmV0dXJuIG99cmV0dXJuIHJ9KSgpIiwiJChkb2N1bWVudCkucmVhZHkoZnVuY3Rpb24gKCkge1xuICAgICQoJy5tZW51LXRvZ2dsZScpLm1lbnVUb2dnbGUoJy5oZWFkZXItbmF2aWdhdGlvbiAubGlzdCcpO1xuXG4gICAgJCgnLmhlYWRlci1zbGlkZXItbGlzdCcpLmR2U2xpZGVyKHsndHJhbnNpdGlvbicgOiAnc2xpZGUnfSk7XG5cbiAgICAkKCcuZm9vdGVyLXNsaWRlci1saXN0JykuZHZTbGlkZXIoe1xuICAgICAgICAndHJhbnNpdGlvbicgOiAnZmFkZSd9KTtcblxufSk7XG5sZXQgYSA9ODsiXX0=
+});
