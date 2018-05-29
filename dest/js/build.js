@@ -10507,11 +10507,14 @@ return jQuery;
                 }
 
                 function prevFadeMove() {
-                    firstSlide().animate({'opacity': 0}, options.speed, function () {
-                        firstSlide().css('opacity', 1);
-                        firstSlide().css('zIndex', +lastSlide().css('zIndex') - 1);
-                        lastSlide().css('zIndex', +lastSlide().css('zIndex')).prependTo($this);
-                    });
+                    lastSlide().css('zIndex', +activeSlide().css('zIndex')-1);
+                    activeSlide().animate({
+                        opacity: 0
+                    }, options.speed, function () {
+                        lastSlide().prependTo($this);
+                        activeSlide().css('opacity', '').removeClass('active');
+                        firstSlide().addClass('active').css('zIndex', '');
+                    })
                 }
             }
 
