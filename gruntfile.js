@@ -27,13 +27,28 @@ module.exports = function(grunt) {
                 },
             },
             '<%= pkg.name %>': {
-                src: ['src/js/*.js']
+                src: ['src/js/main.js']
+            }
+        },
+
+        browserify: {
+            dist: {
+                files: {
+                    'src/js/build.js': 'src/js/main.js',
+                    'src/js/plugins/': 'src/js/plugins/*.js'
+                },
+                options: {
+                    transform: [['babelify', { presets: "es2015" }]],
+                    browserifyOptions: {
+                        debug: true
+                    }
+                }
             }
         },
 
         concat: {
             dist: {
-                src: ['src/js/libs/jquery/dist/jquery.js', 'src/js/plugins/*.js', 'src/js/*.js'],
+                src: ['src/js/libs/jquery/dist/jquery.js', 'src/js/plugins/*.js', 'src/js/build.js'],
                 dest: 'dest/js/build.js'
             }
         },
@@ -152,9 +167,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
-
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('babelify');
 
     // add connect and compass if is needed
-    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
+    grunt.registerTask('default', ['copy', 'imagemin', 'jshint', 'browserify:dist', 'concat', 'uglify', 'compass', 'cssmin', 'htmlmin', 'watch']);
 };
