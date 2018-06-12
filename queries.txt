@@ -1,17 +1,17 @@
 // first query statement is working
 
-SELECT CONCAT(a.first_name,' ', a.last_name) AS 'Full name', SUM(payment.gonorar) AS 'Gonorar\'s Summary' FROM actors AS a JOIN payments ON payments.actor_id=a.actor_id JOIN payment ON payment.payment_id=payments.payment_id WHERE TIMESTAMPDIFF(YEAR,a.DOB,curdate()) BETWEEN 40 AND 60 GROUP BY a.actor_id;
+SELECT CONCAT(a.first_name,' ', a.last_name) AS 'full name', SUM(p.gonorar) AS 'gonorar\'s summary' FROM actors AS a JOIN payments AS p ON p.actor_id=a.actor_id WHERE TIMESTAMPDIFF(YEAR,a.dob,curdate()) BETWEEN 40 AND 60 GROUP BY a.actor_id;
 
 
 // second query statement is working
 
-SELECT s.name AS 'Studio\'s name', CONCAT(a.first_name,' ', a.last_name) AS 'Full name', COUNT(DISTINCT f.film_id) AS 'Film\'s quantity' FROM studios AS s JOIN films AS f ON f.studio_id=s.studio_id JOIN payments AS ps ON ps.film_id=f.film_id JOIN actors AS a ON a.actor_id=ps.actor_id WHERE s.studio_id=1 GROUP BY a.actor_id;
+SELECT s.name AS 'studio\'s name', CONCAT(a.first_name,' ', a.last_name) AS 'full name', COUNT(DISTINCT f.film_id) AS 'film\'s quantity' FROM studios AS s JOIN films AS f ON f.studio_id=s.studio_id AND s.studio_id=1 JOIN payments AS p ON p.film_id=f.film_id JOIN actors AS a ON a.actor_id=p.actor_id GROUP BY a.actor_id;
 
 // third query is working
 
-SELECT CONCAT(a.first_name,' ', a.last_name) AS 'Full name' FROM actors AS a GROUP BY a.last_name HAVING COUNT(a.last_name)=1;
+SELECT CONCAT(a.first_name,' ', a.last_name) AS 'full name' FROM actors AS a GROUP BY a.last_name HAVING COUNT(a.last_name)=1;
 
-// fourth query not working yet
+// fourth query is working
 
-SELECT s.name AS 'Studio\'s name', COUNT(DISTINCT f.film_id) AS 'Film\'s quantity', COUNT(DISTINCT p.payment_id) AS 'Gonorar\'s quantity', SUM(p.gonorar) AS 'Gonorar\'s summary', AVG(p.gonorar) AS 'Avarage gonorar' FROM studios AS s JOIN films AS f ON f.studio_id=s.studio_id JOIN payments AS ps ON ps.film_id=f.film_id JOIN actors AS a ON a.actor_id=ps.actor_id JOIN payment AS p ON p.payment_id=ps.payment_id WHERE a.actor_id=1 AND f.year >= DATE(NOW())+ INTERVAL -60 YEAR GROUP BY s.name ORDER BY AVG(p.gonorar) DESC;
+SELECT s.name AS 'Studio\'s name', COUNT(DISTINCT f.film_id) AS 'Film\'s quantity', COUNT(DISTINCT p.payment_id) AS 'Gonorar\'s quantity', SUM(p.gonorar) AS 'Gonorar\'s summary', AVG(p.gonorar) AS 'Avarage gonorar' FROM studios AS s JOIN films AS f ON f.studio_id=s.studio_id AND f.year >= DATE(NOW())+ INTERVAL -60 YEAR JOIN payments AS p ON p.film_id=f.film_id JOIN actors AS a ON a.actor_id=p.actor_id AND a.actor_id=1 GROUP BY s.name ORDER BY AVG(p.gonorar) DESC;
 
