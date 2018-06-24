@@ -162,7 +162,7 @@
                         firstSlide().css('zIndex','');
                     });
                 }
-
+show
                 function prevFadeMove() {
                     lastSlide().css('zIndex', +activeSlide().css('zIndex')-1);
                     activeSlide().animate({opacity: 0}, options.speed, function () {
