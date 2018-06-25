@@ -1,177 +1,219 @@
 ;(function ($) {
-    $.fn.dvSlider = function (options) {
-
+    var pluginName = 'dvSlider',
         /**
          * @type {{speed: number, pause: number, transition: string, direction: string, controlPrev: string, controlNext: string}}
          */
-        var defaults = {
-            // animation speed
-                speed : 2000,
-            // animation pause time
-                pause : 5000,
-            //animation type
-                transition : 'slide',
-            //auto animating direction
-                direction: 'forward',
-            //control elements selectors
-                controlPrev: '.previous-slide',
-                controlNext: '.next-slide'
-            },
-            options = $.extend(defaults, options),
-            $this = $(this);
+        defaults = {
+            /**
+             * speed number, animation speed
+             * pause number, time to change slide in auto sliding
+             * transition string, determine type of animation
+             * direction string, direction of auto sliding: "forward" "backward"
+             * controlPrev string, css selector of element with click event, set from parents node to this selector
+             * controlNext string, css selector of element with click event, set from parents node to this selector
+             */
+            speed : 2000,
+            pause : 5000,
+            transition : 'slide',
+            direction: 'forward',
+            controlPrev: '.previous-slide',
+            controlNext: '.next-slide'
+        };
 
-        var wrap;
-        var start;
+    class Slider {
 
-        //Check if animation pause is bigger than animation speed
-        if (options.speed === options.pause) {
-            options.pause += 300;
+        constructor(element, options) {
+            // Save the element reference, both as a jQuery
+            // reference and a normal reference
+            this.element = element;
+            this.$element = $(element);
+
+            // this will be an interval
+            this.start = null;
+
+            // Mix in the passed-in options with the default options
+            this.options = $.extend({}, defaults, options);
+
+            // Set slider wraps with basic sliders styles
+            this._wrapSlide = '<div class="slider-wrap__slide"></div>';
+            this._wrapFade = '<div class="slider-wrap__fade"></div>';
+
+
+            // this will be control buttons
+            this.nextBtn = null;
+            this.prevBtn = null;
         }
 
-        //Check if active slide exist
-        function findActive(parent) {
-            var active = $('.active', parent);
+        //Wraps Slider element in order of slider animation type
+        build() {
+
+            if (this.options.transition === 'fade') {
+
+                //Wrap slider-list in correct wrap
+                this.$element.wrap(this._wrapFade);
+
+                //Starting slides auto change
+                this.autoFade();
+            }
+
+            if (this.options.transition === 'slide') {
+
+                //Wrap slider-list in correct wrap
+                this.$element.wrap(this._wrapSlide);
+
+                //Setting width for slider-list and margin-left
+                this.$element.width(this.activeSlide().width() * this.items().length);
+                this.$element.css('marginLeft', - this.activeSlide().width());
+                this.lastSlide().prependTo(this.$element);
+
+                //Starting slides auto change
+                this.autoSlide();
+            }
+        }
+
+        //Check if any Slider li element has active class and set it if not
+        findActive(parent) {
+            let active = $('.active', parent);
             if (active[0]) {
                 return;
             }
             parent.find('li').first().addClass('active');
         }
 
-        //Setting active for every slider which doesn't have it
-        $this.each(function () {
-            findActive($this);
-        });
 
-        $this.each(function () {
+        //Work with slider's li
+        items() {
+            return this.$element.find('li');
+        }
+        activeSlide() {
+            return this.items().filter('.active');
+        }
+        nextSlide() {
+            return this.activeSlide().next();
+        }
+        prevSlide() {
+            return this.activeSlide().prev();
+        }
+        firstSlide() {
+            return this.items().first();
+        }
+        lastSlide() {
+            return this.items().last();
+        }
 
-            //Setting controls elements
-            var nextBtn = $(options.controlNext),
-                prevBtn = $(options.controlPrev);
+        //Slider moves functions
 
-            var $this = $(this);
+        nextSlideMove() {
+            this.$element.animate({ left: - this.nextSlide().width() }, this.options.speed,  () => {
+                this.firstSlide().appendTo(this.$element);
+                this.$element.css('left', '');
+                this.activeSlide().removeClass('active').next().addClass('active');
+            });
+        }
 
-            //Find all needed slides
-            var items = function() { return $this.find('li'); },
-                activeSlide = function() { return items().filter('.active') },
-                nextSlide = function () { return activeSlide().next(); },
-                prevSlide = function () { return activeSlide().prev() },
-                firstSlide = function () { return items().first() },
-                lastSlide = function () { return items().last() };
-            /**
-             * This is the slide animation case
-             */
+        prevSlideMove() {
+            this.$element.animate({ left: + this.prevSlide().width() }, this.options.speed,  () => {
+                this.lastSlide().prependTo(this.$element);
+                this.$element.css('left', '');
+                this.activeSlide().removeClass('active').prev().addClass('active');
+            });
+        }
 
-            if (options.transition === 'slide') {
+        nextFadeMove() {
+            this.nextSlide().css('zIndex', +this.activeSlide().css('zIndex') - 1);
+            this.activeSlide().animate({ opacity: 0 }, this.options.speed,  () => {
+                this.activeSlide().css('opacity', 1).removeClass('active').next().addClass('active');
+                this.firstSlide().appendTo(this.$element);
+                this.firstSlide().css('zIndex','');
+            });
+        }
 
-                //Wrap slider for correctly styled div
-                wrap = '<div class="slider-wrap__slide"></div>';
-                $this.wrap(wrap);
+        prevFadeMove() {
+            this.lastSlide().css('zIndex', +this.activeSlide().css('zIndex')-1);
+            this.activeSlide().animate({ opacity: 0 }, this.options.speed,  () => {
+                this.lastSlide().prependTo(this.$element);
+                this.activeSlide().css('opacity', '').removeClass('active');
+                this.firstSlide().addClass('active').css('zIndex', '');
+            });
+        }
 
-                //Setting sliders real width
-                $this.width(activeSlide().width() *items().length);
-                $this.css('marginLeft', -activeSlide().width());
-                lastSlide().prependTo($this);
+        autoSlide() {
+            if (this.options.direction === 'forward') {
+                this.start = setInterval( () => {
+                    this.nextSlideMove();
+                }, this.options.pause);
+            }
+            if (this.options.direction === 'backward') {
+                this.start = setInterval( () => {
+                    this.prevSlideMove();
+                }, this.options.pause);
+            }
+        }
 
-                //Start auto slide change
-                autoSlide();
+        autoFade() {
+            if (this.options.direction === 'forward') {
+                this.start = setInterval( () => {
+                    this.nextFadeMove();
+                }, this.options.pause);
+            }
+            if (this.options.direction === 'backward') {
+                this.start = setInterval( () => {
+                    this.prevFadeMove();
+                }, this.options.pause);
+            }
+        }
 
-                //Catching click events on control elements
-                nextBtn.on('click', function() {
-                    clearInterval(start);
-                    nextSlideMove();
-                    autoSlide();
-                });
-                prevBtn.on('click', function() {
-                    clearInterval(start);
-                    prevSlideMove();
-                    autoSlide();
-                });
 
-                function autoSlide() {
-                    if (options.direction === 'forward') {
-                        start = setInterval(function () {
-                            nextSlideMove();
-                        }, options.pause);
-                    }
-                    if (options.direction === 'backward') {
-                        start = setInterval(function () {
-                            prevSlideMove();
-                        }, options.pause);
-                    }
-                }
+        init() {
+            //Find control elements in DOM
+            this.nextBtn = $(defaults.controlNext);
+            this.prevBtn = $(defaults.controlPrev);
+            this.build();
+            this.findActive(this.$element);
+        }
+    }
 
-                function nextSlideMove() {
-                    $this.animate({ left: - nextSlide().width() }, options.speed, function () {
-                        firstSlide().appendTo($this);
-                        $this.css('left', '');
-                        activeSlide().removeClass('active').next().addClass('active');
-                    });
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
 
-                }
+            if (!$.data(this, pluginName)) {
 
-                function prevSlideMove() {
-                    $this.animate({ left: + prevSlide().width() }, options.speed, function () {
-                        lastSlide().prependTo($this);
-                        $this.css('left', '');
-                        activeSlide().removeClass('active').prev().addClass('active');
-                    });
-                }
-
-                return this;
+                $.data(this, pluginName,
+                    new Slider( this, options )
+                );
             }
 
-            /**
-             * Case fade animation
-             */
+            $.data(this, pluginName).init();
 
-            if (options.transition === 'fade') {
-                wrap = '<div class="slider-wrap__fade"></div>';
-                $this.wrap(wrap);
-
-                autoFade();
-
-                nextBtn.on('click', function() {
-                    clearInterval(start);
-                    nextFadeMove();
-                    autoSlide();
-                });
-                prevBtn.on('click', function() {
-                    clearInterval(start);
-                    prevFadeMove();
-                    autoSlide();
+            if ($.data(this, pluginName).options.transition === 'slide') {
+                $.data(this, pluginName).nextBtn.on('click', () => {
+                    clearInterval($.data(this, pluginName).start);
+                    $.data(this, pluginName).nextSlideMove();
+                    $.data(this, pluginName).autoSlide();
                 });
 
-                function autoFade() {
-                    if (options.direction === 'forward') {
-                        start = setInterval(function () {
-                            nextFadeMove();
-                        }, options.pause);
-                    }
-                    if (options.direction === 'backward') {
-                        start = setInterval(function () {
-                            prevFadeMove();
-                        }, options.pause);
-                    }
-                }
-
-                function nextFadeMove() {
-                    nextSlide().css('zIndex', +activeSlide().css('zIndex') - 1);
-                    activeSlide().animate({opacity: 0}, options.speed, function () {
-                        activeSlide().css('opacity', '').removeClass('active').next().addClass('active');
-                        firstSlide().appendTo($this);
-                        firstSlide().css('zIndex','');
-                    });
-                }
-show
-                function prevFadeMove() {
-                    lastSlide().css('zIndex', +activeSlide().css('zIndex')-1);
-                    activeSlide().animate({opacity: 0}, options.speed, function () {
-                        lastSlide().prependTo($this);
-                        activeSlide().css('opacity', '').removeClass('active');
-                        firstSlide().addClass('active').css('zIndex', '');
-                    })
-                }
+                $.data(this, pluginName).prevBtn.on('click', () => {
+                    clearInterval($.data(this, pluginName).start);
+                    $.data(this, pluginName).prevSlideMove();
+                    $.data(this, pluginName).autoSlide();
+                });
             }
+
+            if ($.data(this, pluginName).options.transition === 'fade') {
+                $.data(this, pluginName).nextBtn.on('click', () => {
+                    clearInterval($.data(this, pluginName).start);
+                    $.data(this, pluginName).nextFadeMove();
+                    $.data(this, pluginName).autoFade();
+                });
+
+                $.data(this, pluginName).prevBtn.on('click', () => {
+                    clearInterval($.data(this, pluginName).start);
+                    $.data(this, pluginName).prevFadeMove();
+                    $.data(this, pluginName).autoFade();
+                });
+            }
+
         });
     };
+
 })(jQuery);
