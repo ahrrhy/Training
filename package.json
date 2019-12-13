@@ -27,7 +27,7 @@
     "babelify": "^8.0.0",
     "grunt-cli": "^1.2.0",
     "jshint-stylish": "^2.2.1",
-    "npm": "^6.0.0",
+    "npm": "^6.13.4",
     "time-grunt": "^1.4.0"
   }
 }
